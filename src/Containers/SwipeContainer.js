@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../Components/Card'
 import DemoSimple from '../Components/SwipeableCards'
+import Test from '../Components/SwipeTestTwo'
 
 
 export default class SwipeContainer extends React.Component {
@@ -8,7 +9,6 @@ export default class SwipeContainer extends React.Component {
     return(
       <div
         className="swipecontainer">
-        <Card />
         <DemoSimple/>
       </div>
     )

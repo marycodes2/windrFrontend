@@ -1,29 +1,37 @@
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
+import Swipeable from 'react-swipeable'
 import Card from './Card'
+import flowRight from 'lodash/flowRight';
 
-const styles = {
-  slide: {
-  },
-  slide1: {
-    backgroundColor: 'lightcyan',
-  },
-  slide2: {
-    backgroundColor: 'pink',
-  },
-  slide3: {
-    backgroundColor: 'violet',
-  },
-};
+export default class DemoSimple extends React.Component {
 
-function DemoSimple() {
-  return (
-    <SwipeableViews enableMouseEvents>
-      <div style={Object.assign({}, styles.slide, styles.slide1)}><Card/></div>
-      <div style={Object.assign({}, styles.slide, styles.slide2)}><Card/></div>
-      <div style={Object.assign({}, styles.slide, styles.slide3)}><Card/></div>
-    </SwipeableViews>
-  );
+  state = {
+    cards: []
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/api/v1/cards')
+    .then(res => res.json())
+    .then(data => this.setState({cards: data}))
+  }
+
+  onChangeIndex = (index, indexLatest, meta) => {
+    // console.log(index, indexLatest, meta)
+    if (index > indexLatest) {
+      fetch('http://localhost:3000/api/v1/user_cards')
+      .then(res => res.json())
+      .then(data => console.log(data))
+    }
+  }
+
+  render() {
+    return(
+      <SwipeableViews enableMouseEvents
+        onChangeIndex={this.onChangeIndex}>
+        {this.state.cards.map(card =>
+        <div> <Card card={card}/> </div>)}
+      </SwipeableViews>
+    )
+  }
 }
-
-export default DemoSimple;
