@@ -17,9 +17,21 @@ export default class DemoSimple extends React.Component {
   }
 
   onChangeIndex = (index, indexLatest, meta) => {
-    // console.log(index, indexLatest, meta)
+    const cardId = this.state.cards[indexLatest].id
     if (index > indexLatest) {
-      fetch('http://localhost:3000/api/v1/user_cards')
+      fetch('http://localhost:3000/api/v1/user_cards', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          user_id: 1,
+          card_id: cardId,
+          completed: false,
+          expired: false
+        })
+      })
       .then(res => res.json())
       .then(data => console.log(data))
     }

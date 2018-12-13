@@ -12,7 +12,8 @@ const Header = (props) => {
           <div className="sub header">Swipe 4 Energy</div>
         </h2>
       </a>
-      
+      <Link className="item ui header" to='/'>Home</Link>
+      <Link className="item ui header" to='/dashboard'>Dashboard</Link>
     </div>
   )
 }
