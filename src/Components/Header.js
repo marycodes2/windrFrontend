@@ -1,10 +1,13 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const Header = (props) => {
+
+class Header extends React.Component {
+  render(){
   return(
     <div
-      className={`ui inverted ${props.color} menu navbar`}>
+      className={`ui inverted ${this.props.color} menu navbar`}>
       <a className="item">
         <h2 className="ui header">
           <i className= 'envira icon'></i>
@@ -13,9 +16,10 @@ const Header = (props) => {
         </h2>
       </a>
       <Link className="item ui header" to='/'>Home</Link>
-      <Link className="item ui header" to='/dashboard'>Dashboard</Link>
+      <NavLink className="item ui header" to='/dashboard'>Dashboard</NavLink>
     </div>
   )
+  }
 }
 
-export default Header
+export default connect()(Header)

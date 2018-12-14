@@ -1,8 +1,12 @@
 import React from 'react'
 import Card from '../Components/Card'
+import { connect } from 'react-redux'
 
-export default class DashboardContainer extends React.Component {
+
+class DashboardContainer extends React.Component {
+
   render(){
+    console.log('rendering dashboard')
     return(
       <div>
         <h2>Queue</h2>
@@ -12,3 +16,11 @@ export default class DashboardContainer extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    myCards: state.reducer.myCards
+  }
+}
+
+export default connect(mapStateToProps)(DashboardContainer)
