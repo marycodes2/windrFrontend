@@ -7,7 +7,7 @@ export default class WindrCard extends React.Component {
   render(){
   return(
     <Card
-      onClick={() => this.props.respondToClick(this.props.card.id)}
+      onClick={() => this.props.respondToClick(this.props.card)}
       className="ui centered card"
       image={this.props.card.image}
       header={this.props.card.name}

@@ -7,23 +7,15 @@ import flowRight from 'lodash/flowRight';
 export default class DemoSimple extends React.Component {
 
   determineCardsNotInQueue = () => {
-    console.log(this.props.myCards)
     let myCardIds = this.props.myCards.map(card => card.id)
 
     let cardsNotInQueue = this.props.allCards.filter(card =>
       !(myCardIds.includes(card.id)))
-
-    console.log("available cards", cardsNotInQueue)
-    console.log("cards props", this.props.allCards)
-    console.log("my cards state", this.props.myCards)
-
     return cardsNotInQueue
   }
 
-  respondToClick = (cardId) => {
-    console.log("cardId",cardId)
-    this.props.removeCard()
-    const card = this.determineCardsNotInQueue()[cardId]
+  respondToClick = (returnCard) => {
+    this.props.addCard(returnCard)
     if (true) {
       fetch('http://localhost:3000/api/v1/user_cards', {
         method: "POST",
@@ -33,7 +25,7 @@ export default class DemoSimple extends React.Component {
         },
         body: JSON.stringify({
           user_id: 1,
-          card_id: cardId,
+          card_id: returnCard.id,
           completed: false,
           expired: false
         })
@@ -47,7 +39,7 @@ export default class DemoSimple extends React.Component {
     return(
       <div>
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
-        <div> <Card card={card} respondToClick={(cardId) => this.respondToClick(cardId)}/>  </div>)}
+        <div> <Card card={card} respondToClick={(card) => this.respondToClick(card)}/>  </div>)}
       </div>
     )
   }

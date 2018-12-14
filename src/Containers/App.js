@@ -32,13 +32,17 @@ class App extends Component {
     this.setState({allCards:newAllCards})
   }
 
+  addCard(card) {
+    this.setState({myCards: [...this.state.myCards, card]})
+  }
+
   render() {
     return (
       <div className="App">
         <Header color={"blue"}/>
       <Switch>
         <Route path='/dashboard' component={() => <DashboardContainer myCards={this.state.myCards}/>}/>
-        <Route path='/' component={()=> <SwipeContainer allCards={this.state.allCards} myCards={this.state.myCards} removeCard={() => this.removeCard()}/>}/>
+        <Route path='/' component={()=> <SwipeContainer allCards={this.state.allCards} myCards={this.state.myCards} removeCard={() => this.removeCard()} addCard={(card)=> this.addCard(card)}/>}/>
       </Switch>
       </div>
     );
