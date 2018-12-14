@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../Components/Card'
+import DashboardCard from '../Components/DashboardCard'
 import { connect } from 'react-redux'
 
 
@@ -11,7 +11,7 @@ class DashboardContainer extends React.Component {
       <div>
         <h2>Queue</h2>
           {this.props.myCards.map(card =>
-            <Card card={card} key={card.id}/> )}
+            <DashboardCard card={card} key={card.id}/> )}
       </div>
     )
   }

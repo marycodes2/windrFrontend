@@ -48,8 +48,7 @@ export default class WindrCard extends React.Component {
   }
 
   render(){
-    // debugger
-  return(
+    return(
     <Card
       className="ui centered card"
       id={`card-${this.props.card.id}`}
