@@ -14,7 +14,7 @@ export default class DemoSimple extends React.Component {
     return cardsNotInQueue
   }
 
-  respondToClick = (returnCard) => {
+  respondToSwipe = (returnCard, position) => {
     this.props.addCard(returnCard)
     if (true) {
       fetch('http://localhost:3000/api/v1/user_cards', {
@@ -39,7 +39,7 @@ export default class DemoSimple extends React.Component {
     return(
       <div>
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
-        <div> <Card card={card} respondToClick={(card) => this.respondToClick(card)}/>  </div>)}
+        <div> <Card card={card} respondToSwipe={(card) => this.respondToSwipe(card)}/>  </div>)}
       </div>
     )
   }

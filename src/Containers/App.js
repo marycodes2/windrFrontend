@@ -26,12 +26,6 @@ class App extends Component {
     }
   }
 
-  removeCard() {
-    let newAllCards = this.state.allCards.slice()
-    newAllCards.splice(0,1)
-    this.setState({allCards:newAllCards})
-  }
-
   addCard(card) {
     this.setState({myCards: [...this.state.myCards, card]})
   }
