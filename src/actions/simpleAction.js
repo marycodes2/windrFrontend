@@ -17,4 +17,8 @@ function fetchCards() {
   }
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards }
+function addCardsToMyCards(card) {
+  return {type: "ADD_TO_MY_CARDS", card}
+}
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardsToMyCards }

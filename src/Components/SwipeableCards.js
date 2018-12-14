@@ -1,10 +1,9 @@
 import React from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import Swipeable from 'react-swipeable'
 import Card from './Card'
-import flowRight from 'lodash/flowRight';
+import { connect } from 'react-redux'
+import { addCardsToMyCards as addCard} from '../actions/simpleAction'
 
-export default class DemoSimple extends React.Component {
+class DemoSimple extends React.Component {
 
   determineCardsNotInQueue = () => {
     let myCardIds = this.props.myCards.map(card => card.id)
@@ -14,8 +13,12 @@ export default class DemoSimple extends React.Component {
     return cardsNotInQueue
   }
 
+  addCard = (card) => {
+    this.props.addCard(card)
+  }
+
   respondToSwipe = (returnCard, position) => {
-    this.props.addCard(returnCard)
+    this.addCard(returnCard)
     if (true) {
       fetch('http://localhost:3000/api/v1/user_cards', {
         method: "POST",
@@ -39,8 +42,23 @@ export default class DemoSimple extends React.Component {
     return(
       <div>
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
-        <div> <Card card={card} respondToSwipe={(card) => this.respondToSwipe(card)}/>  </div>)}
+        <div> <Card card={card} key={card.id} respondToSwipe={(card) => this.respondToSwipe(card)}/>  </div>)}
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    myCards: state.reducer.myCards,
+    allCards: state.reducer.allCards
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCard: (card) => {dispatch(addCard(card))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DemoSimple)

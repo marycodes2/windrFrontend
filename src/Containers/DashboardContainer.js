@@ -11,7 +11,7 @@ class DashboardContainer extends React.Component {
       <div>
         <h2>Queue</h2>
           {this.props.myCards.map(card =>
-            <Card card={card}/> )}
+            <Card card={card} key={card.id}/> )}
       </div>
     )
   }

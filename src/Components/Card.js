@@ -1,8 +1,6 @@
 import React from 'react'
 import { Card, Icon } from 'semantic-ui-react'
 import interact from 'interactjs'
-import TWEEN from '@tweenjs/tween.js'
-
 
 export default class WindrCard extends React.Component {
 
@@ -33,9 +31,7 @@ export default class WindrCard extends React.Component {
   }
 
   dragMoveListenerEnd(event) {
-    var target = event.target
     let positionX = event.pageX;
-    let card = this
     let leftBound = -50
     let rightBound = window.innerWidth + 50
 
@@ -52,7 +48,7 @@ export default class WindrCard extends React.Component {
   }
 
   render(){
-
+    // debugger
   return(
     <Card
       className="ui centered card"
