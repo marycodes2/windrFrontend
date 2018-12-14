@@ -6,19 +6,25 @@ import flowRight from 'lodash/flowRight';
 
 export default class DemoSimple extends React.Component {
 
-  state = {
-    cards: []
+  determineCardsNotInQueue = () => {
+    console.log(this.props.myCards)
+    let myCardIds = this.props.myCards.map(card => card.id)
+
+    let cardsNotInQueue = this.props.allCards.filter(card =>
+      !(myCardIds.includes(card.id)))
+
+    console.log("available cards", cardsNotInQueue)
+    console.log("cards props", this.props.allCards)
+    console.log("my cards state", this.props.myCards)
+
+    return cardsNotInQueue
   }
 
-  componentDidMount() {
-    fetch('http://localhost:3000/api/v1/cards')
-    .then(res => res.json())
-    .then(data => this.setState({cards: data}))
-  }
-
-  onChangeIndex = (index, indexLatest, meta) => {
-    const cardId = this.state.cards[indexLatest].id
-    if (index > indexLatest) {
+  respondToClick = (cardId) => {
+    console.log("cardId",cardId)
+    this.props.removeCard()
+    const card = this.determineCardsNotInQueue()[cardId]
+    if (true) {
       fetch('http://localhost:3000/api/v1/user_cards', {
         method: "POST",
         headers: {
@@ -39,11 +45,10 @@ export default class DemoSimple extends React.Component {
 
   render() {
     return(
-      <SwipeableViews enableMouseEvents
-        onChangeIndex={this.onChangeIndex}>
-        {this.state.cards.map(card =>
-        <div> <Card card={card}/> </div>)}
-      </SwipeableViews>
+      <div>
+        {this.determineCardsNotInQueue().slice(0, 1).map(card =>
+        <div> <Card card={card} respondToClick={(cardId) => this.respondToClick(cardId)}/>  </div>)}
+      </div>
     )
   }
 }

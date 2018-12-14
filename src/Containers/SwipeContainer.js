@@ -8,7 +8,7 @@ export default class SwipeContainer extends React.Component {
     return(
       <div
         className="swipecontainer">
-        <DemoSimple/>
+        <DemoSimple allCards={this.props.allCards} myCards={this.props.myCards} removeCard={this.props.removeCard}/>
       </div>
     )
   }
