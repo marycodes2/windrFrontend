@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 class DashboardContainer extends React.Component {
 
   determineQueueCards = () => {
+    // Need to have this filter user_card not card!
     const t = this.props.myCards.filter(card => !(card.completed))
     console.log("queue cards", t)
     return t
