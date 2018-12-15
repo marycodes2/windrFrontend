@@ -1,11 +1,14 @@
 import React from 'react'
 import { Card, Icon } from 'semantic-ui-react'
+import { completeCard } from '../actions/simpleAction'
+import { connect } from 'react-redux'
+
 
 const DashboardCard = (props) => {
+
   return(
   <Card
     className="ui centered card"
-    id={`card-${props.card.id}`}
     image={props.card.image}
     header={props.card.name}
     meta=''
@@ -24,6 +27,13 @@ const DashboardCard = (props) => {
       <br/>
       <Icon name='plus square outline'/>
       {props.card.score} Points
+      <br/><br/>
+      <input
+      type="checkbox"
+      name="completed"
+      onChange={() => props.completeCard(props.card)}
+      ></input>
+      <label for="completed"> Completed?</label>
     </a>
     </div>
     }
@@ -31,4 +41,8 @@ const DashboardCard = (props) => {
 )
 }
 
-export default DashboardCard
+const mapDispatchToProps = dispatch => ({
+  completeCard: (card) => {dispatch(completeCard(card))}
+})
+
+export default connect(null, mapDispatchToProps)(DashboardCard)

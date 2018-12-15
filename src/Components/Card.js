@@ -41,6 +41,7 @@ export default class WindrCard extends React.Component {
       this.props.respondToSwipe(this.props.card, "left")
     }
     else {
+      
       // target.style.webkitTransform =
       // // target.style.transform =
       // 'translate(' + 0 + 'px, ' + 0 + 'px)';

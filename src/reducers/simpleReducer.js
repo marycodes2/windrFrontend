@@ -8,6 +8,18 @@ export default (state = {allCards: [], myCards: []}, action) => {
     return {...state, myCards: action.cards}
   case 'ADD_TO_MY_CARDS':
       return {...state, myCards: [...state.myCards, action.card]}
+  case 'COMPLETE_CARD':
+      let newMyCards = state.myCards.map(card => {
+        if (card.id === action.data.id){
+          return {
+            ...card,
+            completed: true
+          }
+        } else {
+            return card
+          }
+      })
+      return {...state, myCards: newMyCards}
   default:
    return state
  }

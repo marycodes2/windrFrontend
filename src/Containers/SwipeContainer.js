@@ -18,24 +18,33 @@ class SwipeContainer extends React.Component {
     this.props.addCard(card)
   }
 
+  fetch = (card, liked) => {
+    fetch('http://localhost:3000/api/v1/user_cards', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: 1,
+        card_id: card.id,
+        completed: false,
+        expired: false,
+        liked: liked
+      })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+  }
+
+
   respondToSwipe = (returnCard, position) => {
     this.addCard(returnCard)
-    if (true) {
-      fetch('http://localhost:3000/api/v1/user_cards', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          user_id: 1,
-          card_id: returnCard.id,
-          completed: false,
-          expired: false
-        })
-      })
-      .then(res => res.json())
-      .then(data => console.log(data))
+    if (position === "left") {
+      this.fetch(returnCard, false)
+    }
+    else if (position === "right") {
+      this.fetch(returnCard, true)
     }
   }
 
@@ -43,7 +52,7 @@ class SwipeContainer extends React.Component {
     return(
       <div>
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
-        <div> <Card card={card} key={card.id} respondToSwipe={(card) => this.respondToSwipe(card)}/> </div>)}
+        <div> <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/> </div>)}
       </div>
     )
   }
