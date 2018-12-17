@@ -14,6 +14,6 @@ code {
     monospace;
 }
 
-.ui.inverted.menu .item {
-  color: black;
+html, body, #root, #root>div {
+  height: 100%
 }

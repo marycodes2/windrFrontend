@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { addCardsToMyCards as addCard, addCardsToUserCards as addUserCard, addCardToQueue} from '../actions/simpleAction'
+import { addCardToMyCards, addCardToUserCards} from '../actions/simpleAction'
 
 class SwipeContainer extends React.Component {
 
@@ -15,16 +15,16 @@ class SwipeContainer extends React.Component {
   }
 
   addCard = (card) => {
-    this.props.addCard(card)
+    this.props.addCardToMyCards(card)
   }
 
   respondToSwipe = (returnCard, position) => {
     this.addCard(returnCard)
     if (position === "left") {
-      this.props.addCardToQueue(returnCard, false)
+      this.props.addCardToUserCards(returnCard, false)
     }
     else if (position === "right") {
-      this.props.addCardToQueue(returnCard, true)
+      this.props.addCardToUserCards(returnCard, true)
     }
   }
 
@@ -48,8 +48,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (card) => {dispatch(addCard(card))},
-    addCardToQueue: (card, liked) => {dispatch(addCardToQueue(card, liked))}
+    addCardToMyCards: (card) => {dispatch(addCardToMyCards(card))},
+    addCardToUserCards: (card, liked) => {dispatch(addCardToUserCards(card, liked))}
   }
 }
 

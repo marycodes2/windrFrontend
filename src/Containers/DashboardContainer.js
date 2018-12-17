@@ -20,10 +20,10 @@ class DashboardContainer extends React.Component {
       <div>
         <h2>Queue</h2>
           {this.determineQueueCards().map(card =>
-            <DashboardCard card={card} key={card.id}/> )}
+            <DashboardCard card={card} completed={false} key={card.id}/> )}
         <h2>Completed</h2>
           {this.determineCompletedCards().map(card =>
-          <DashboardCard card={card} key={card.id}/>   )}
+          <DashboardCard card={card} completed={true} key={card.id}/>   )}
       </div>
     )
   }

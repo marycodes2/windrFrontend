@@ -4,8 +4,19 @@ import { completeCard } from '../actions/simpleAction'
 import { connect } from 'react-redux'
 
 
-const DashboardCard = (props) => {
+const DashboardCard = (props, completed) => {
 
+  const determineIfComplete = () => {
+    if (!props.completed) {
+      return (<div><input
+      type="checkbox"
+      name="completed"
+      onChange={() => props.completeCard(props.card)}
+      ></input>
+      <label for="completed"> Completed?</label>
+      </div>)
+    }
+  }
   return(
   <Card
     className="ui centered card"
@@ -28,12 +39,7 @@ const DashboardCard = (props) => {
       <Icon name='plus square outline'/>
       {props.card.score} Points
       <br/><br/>
-      <input
-      type="checkbox"
-      name="completed"
-      onChange={() => props.completeCard(props.card)}
-      ></input>
-      <label for="completed"> Completed?</label>
+      {determineIfComplete()}
     </a>
     </div>
     }

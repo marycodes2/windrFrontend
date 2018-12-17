@@ -1,10 +1,9 @@
 function fetchedAllCards(cards){
-  return {type: "FETCHED_ALL_CARDS", cards}
+  return {type: "FETCH_ALL_CARDS", cards}
 }
 
 function fetchedMyCards(cardData){
-  console.log("fetched my cards", cardData)
-  return {type: "FETCHED_MY_CARDS", cardData}
+  return {type: "FETCH_MY_CARDS", cardData}
 }
 
 function fetchCards() {
@@ -19,7 +18,6 @@ function fetchCards() {
 }
 
 function completedCard(data) {
-  console.log("logging submitted data in simple action:",data)
   return {type: "COMPLETE_CARD", data}
 }
 
@@ -42,11 +40,11 @@ function completeCard(card) {
   }
 }
 
-function addedCardToQueue(addedCard) {
-  return {type: "ADDED_CARD_TO_QUEUE", addedCard}
+function addedCardToUserCards(addedCard) {
+  return {type: "ADD_CARD_TO_USER_CARDS", addedCard}
 }
 
-function addCardToQueue(card, liked) {
+function addCardToUserCards(card, liked) {
   return dispatch => {
     fetch('http://localhost:3000/api/v1/user_cards', {
       method: "POST",
@@ -63,18 +61,12 @@ function addCardToQueue(card, liked) {
       })
     })
     .then(res => res.json())
-    .then(data => dispatch(addedCardToQueue(data)))
+    .then(data => dispatch(addedCardToUserCards(data)))
   }
 }
 
-function addCardsToMyCards(card) {
-  console.log("adding to my cards....", card)
+function addCardToMyCards(card) {
   return {type: "ADD_TO_MY_CARDS", card}
 }
 
-// function addCardsToUserCards(card) {
-//   // console.log("ADDING TO USER CARDS", card)
-//   return {type: "ADD_TO_USER_CARDS", card}
-// }
-
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardsToMyCards, completeCard, addCardToQueue }
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards}

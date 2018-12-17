@@ -2,12 +2,14 @@
 
 export default (state = {allCards: [], myCards: [], userCards: []}, action) => {
  switch (action.type) {
-  case 'FETCHED_ALL_CARDS':
+  case 'FETCH_ALL_CARDS':
    return {...state, allCards: action.cards}
-  case 'FETCHED_MY_CARDS':
+  case 'FETCH_MY_CARDS':
     return {...state, myCards: action.cardData.cards, userCards: action.cardData.user_cards}
   case 'ADD_TO_MY_CARDS':
       return {...state, myCards: [...state.myCards, action.card]}
+  case "ADD_CARD_TO_USER_CARDS":
+    return {...state, userCards: [...state.userCards, action.addedCard]}
   case 'COMPLETE_CARD':
       let newUserCards = state.userCards.map(card => {
         if (card.id === action.data.id){
@@ -20,8 +22,6 @@ export default (state = {allCards: [], myCards: [], userCards: []}, action) => {
           }
       })
       return {...state, userCards: newUserCards}
-    case "ADDED_CARD_TO_QUEUE":
-      return {...state, userCards: [...state.userCards, action.addedCard]}
   default:
    return state
  }
