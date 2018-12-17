@@ -6,16 +6,13 @@ import { connect } from 'react-redux'
 class DashboardContainer extends React.Component {
 
   determineQueueCards = () => {
-    // Need to have this filter user_card not card!
-    const t = this.props.myCards.filter(card => !(card.completed))
-    console.log("queue cards", t)
-    return t
+    const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked )).map(card => card.id)
+    return this.props.myCards.filter(card => uncompletedUserCardIds.includes(card.id))
   }
 
   determineCompletedCards = () => {
-    const t = this.props.myCards.filter(card => (card.completed))
-    console.log("completed cards", t)
-    return t
+    const completedUserCardIds = this.props.userCards.filter(userCard => userCard.completed).map(card => card.id)
+    return this.props.myCards.filter(card => completedUserCardIds.includes(card.id))
   }
 
   render(){
@@ -34,7 +31,8 @@ class DashboardContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    myCards: state.reducer.myCards
+    myCards: state.reducer.myCards,
+    userCards: state.reducer.userCards
   }
 }
 

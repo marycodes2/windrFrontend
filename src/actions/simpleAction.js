@@ -2,8 +2,9 @@ function fetchedAllCards(cards){
   return {type: "FETCHED_ALL_CARDS", cards}
 }
 
-function fetchedMyCards(cards){
-  return {type: "FETCHED_MY_CARDS", cards}
+function fetchedMyCards(cardData){
+  console.log("fetched my cards", cardData)
+  return {type: "FETCHED_MY_CARDS", cardData}
 }
 
 function fetchCards() {
@@ -13,12 +14,8 @@ function fetchCards() {
     .then(data => dispatch(fetchedAllCards(data)))
     .then(fetch(`http://localhost:3000/api/v1/users/${1}`)
     .then(result => result.json())
-    .then(cardData => dispatch(fetchedMyCards(cardData.cards))))
+    .then(cardData => dispatch(fetchedMyCards(cardData))))
   }
-}
-
-function addCardsToMyCards(card) {
-  return {type: "ADD_TO_MY_CARDS", card}
 }
 
 function completedCard(data) {
@@ -45,4 +42,39 @@ function completeCard(card) {
   }
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardsToMyCards, completeCard }
+function addedCardToQueue(addedCard) {
+  return {type: "ADDED_CARD_TO_QUEUE", addedCard}
+}
+
+function addCardToQueue(card, liked) {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/user_cards', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: 1,
+        card_id: card.id,
+        completed: false,
+        expired: false,
+        liked: liked
+      })
+    })
+    .then(res => res.json())
+    .then(data => dispatch(addedCardToQueue(data)))
+  }
+}
+
+function addCardsToMyCards(card) {
+  console.log("adding to my cards....", card)
+  return {type: "ADD_TO_MY_CARDS", card}
+}
+
+// function addCardsToUserCards(card) {
+//   // console.log("ADDING TO USER CARDS", card)
+//   return {type: "ADD_TO_USER_CARDS", card}
+// }
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardsToMyCards, completeCard, addCardToQueue }

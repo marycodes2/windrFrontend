@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { addCardsToMyCards as addCard} from '../actions/simpleAction'
+import { addCardsToMyCards as addCard, addCardsToUserCards as addUserCard, addCardToQueue} from '../actions/simpleAction'
 
 class SwipeContainer extends React.Component {
 
@@ -18,33 +18,13 @@ class SwipeContainer extends React.Component {
     this.props.addCard(card)
   }
 
-  fetch = (card, liked) => {
-    fetch('http://localhost:3000/api/v1/user_cards', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        user_id: 1,
-        card_id: card.id,
-        completed: false,
-        expired: false,
-        liked: liked
-      })
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-  }
-
-
   respondToSwipe = (returnCard, position) => {
     this.addCard(returnCard)
     if (position === "left") {
-      this.fetch(returnCard, false)
+      this.props.addCardToQueue(returnCard, false)
     }
     else if (position === "right") {
-      this.fetch(returnCard, true)
+      this.props.addCardToQueue(returnCard, true)
     }
   }
 
@@ -61,13 +41,15 @@ class SwipeContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     myCards: state.reducer.myCards,
-    allCards: state.reducer.allCards
+    allCards: state.reducer.allCards,
+    userCards: state.reducer.userCards
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (card) => {dispatch(addCard(card))}
+    addCard: (card) => {dispatch(addCard(card))},
+    addCardToQueue: (card, liked) => {dispatch(addCardToQueue(card, liked))}
   }
 }
 

@@ -12,7 +12,7 @@ class Header extends React.Component {
         <h2 className="ui header">
           <i className= 'envira icon'></i>
           <div className="content">Windr</div>
-          <div className="sub header">Swipe 4 Energy</div>
+          <div className="sub header">Luv yr planet</div>
         </h2>
       </a>
       <Link className="item ui header" to='/'>Home</Link>
