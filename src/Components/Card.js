@@ -41,7 +41,7 @@ export default class WindrCard extends React.Component {
       this.props.respondToSwipe(this.props.card, "left")
     }
     else {
-      
+
       // target.style.webkitTransform =
       // // target.style.transform =
       // 'translate(' + 0 + 'px, ' + 0 + 'px)';
@@ -58,7 +58,7 @@ export default class WindrCard extends React.Component {
       meta=''
       description={this.props.card.description}
       extra={
-      <div>
+      <React.Fragment>
       <a>
         <Icon name='dollar sign' />
         {this.props.card.dollar_savings* 5} Saved Over 5 Years
@@ -72,8 +72,9 @@ export default class WindrCard extends React.Component {
         <Icon name='plus square outline'/>
         {this.props.card.score} Points
       </a>
-      </div>
+      </React.Fragment>
       }
+
     />
   )
 }

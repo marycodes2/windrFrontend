@@ -6,12 +6,13 @@ import { addCardToMyCards, addCardToUserCards} from '../actions/simpleAction'
 class SwipeContainer extends React.Component {
 
   determineCardsNotInQueue = () => {
-    let myCardIds = this.props.myCards.map(card => card.id)
+    var myCardIds = this.props.myCards.map(card => card.id)
 
     let cardsNotInQueue = this.props.allCards.filter(card =>
       !(myCardIds.includes(card.id)))
 
     return cardsNotInQueue
+
   }
 
   addCard = (card) => {
@@ -30,9 +31,11 @@ class SwipeContainer extends React.Component {
 
   render() {
     return(
-      <div>
+      <div
+        id="swipe"
+        className="ui one column grid cards">
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
-        <div> <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/> </div>)}
+        <React.Fragment> <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/> </React.Fragment>)}
       </div>
     )
   }

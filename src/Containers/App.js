@@ -14,7 +14,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <React.Fragment>
         <Header color={"blue"}/>
       <Switch>
 
@@ -25,7 +25,7 @@ class App extends Component {
               component={SwipeContainer}/>
 
       </Switch>
-      </div>
+    </React.Fragment>
     )
   }
 }

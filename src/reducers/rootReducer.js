@@ -3,4 +3,4 @@ import reducer from './simpleReducer';
 
 export default combineReducers({
  reducer
-});
+})

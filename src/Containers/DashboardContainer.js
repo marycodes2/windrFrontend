@@ -1,12 +1,13 @@
 import React from 'react'
 import DashboardCard from '../Components/DashboardCard'
 import { connect } from 'react-redux'
+import { Grid, Card } from 'semantic-ui-react'
 
 
 class DashboardContainer extends React.Component {
 
   determineQueueCards = () => {
-    const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked )).map(card => card.id)
+    const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked && (!userCard.expired))).map(card => card.id)
     return this.props.myCards.filter(card => uncompletedUserCardIds.includes(card.id))
   }
 
@@ -17,14 +18,24 @@ class DashboardContainer extends React.Component {
 
   render(){
     return(
-      <div>
-        <h2>Queue</h2>
-          {this.determineQueueCards().map(card =>
-            <DashboardCard card={card} completed={false} key={card.id}/> )}
-        <h2>Completed</h2>
-          {this.determineCompletedCards().map(card =>
-          <DashboardCard card={card} completed={true} key={card.id}/>   )}
-      </div>
+      <Grid celled padded>
+        <Grid.Row>
+          <Grid.Column width={16} columns={3} className="ui three column grid" padded>
+            <h3>Queue</h3>
+              <Card.Group className="row">
+                {this.determineQueueCards().map(card =>
+                <DashboardCard card={card} completed={false} key={card.id}/> )}</Card.Group>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={8}>
+            <h3>Completed</h3>
+              {this.determineCompletedCards().map(card =>
+              <DashboardCard card={card} completed={true} key={card.id}/>   )}
+          </Grid.Column>
+        </Grid.Row>
+
+      </Grid>
     )
   }
 }
