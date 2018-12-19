@@ -32,8 +32,8 @@ export default class WindrCard extends React.Component {
 
   dragMoveListenerEnd(event) {
     let positionX = event.pageX;
-    let leftBound = -500
-    let rightBound = window.innerWidth + 500
+    let leftBound = -50
+    let rightBound = window.innerWidth + 50
 
     if (positionX > rightBound) {
       this.props.respondToSwipe(this.props.card, "right")
