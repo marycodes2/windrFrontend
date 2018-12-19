@@ -32,8 +32,8 @@ export default class WindrCard extends React.Component {
 
   dragMoveListenerEnd(event) {
     let positionX = event.pageX;
-    let leftBound = -50
-    let rightBound = window.innerWidth + 50
+    let leftBound = -500
+    let rightBound = window.innerWidth + 500
 
     if (positionX > rightBound) {
       this.props.respondToSwipe(this.props.card, "right")
@@ -53,7 +53,7 @@ export default class WindrCard extends React.Component {
     <Card
       className="ui centered card"
       id={`card-${this.props.card.id}`}
-      image={this.props.card.image}
+      image={require(`../images/${this.props.card.image}.jpg`)}
       header={this.props.card.name}
       meta=''
       description={this.props.card.description}

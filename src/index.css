@@ -7,7 +7,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("https://www.shutterstock.com/image-photo/green-palm-leaf-branches-on-white-544569505?src=iiMLrvG39Tc5D_pa6a7drw-1-15");
 }
 
 /* #root {
@@ -45,19 +44,19 @@ body {
   position: relative;
 }
 
-.ui one column grid cards {
+/* .ui one column grid cards {
   position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-}
+} */
 
-.ui one column grid cards:before {
+/* .ui one column grid cards:before {
   display: inline-block;
   vertical-align: middle;
   height: 100%;
-  }
+  } */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -75,10 +74,11 @@ code {
   vertical-align: middle;
 }
 
-.ui card ui centered card {
-  display: inline-block;
+.ui.one.cards>.card {
+  /* display: inline-block;
   vertical-align: middle;
-  /* margin-top: 1.5rem; */
+  margin-top: 1.5rem; */
+  width: 50%;
 }
 
 h2.ui.header .sub.header {
