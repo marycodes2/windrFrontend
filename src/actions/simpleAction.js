@@ -69,4 +69,31 @@ function addCardToMyCards(card) {
   return {type: "ADD_TO_MY_CARDS", card}
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards}
+function createAccount(formData) {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      user: {
+        username: formData.username,
+        password: formData.password,
+        name: formData.name,
+        access_type: 'user',
+        avatar: 'https://images-na.ssl-images-amazon.com/images/I/A15dQM39ELL._CR0,0,3840,2880_._SL1000_.jpg'
+      }
+    })
+  })
+    .then(res => res.json())
+    .then(data => console.log(data.jwt))
+  }
+}
+
+function createdAccount(newUser) {
+  return {type: "CREATED_ACCOUNT", newUser}
+}
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount}

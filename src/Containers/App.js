@@ -5,6 +5,8 @@ import DashboardContainer from './DashboardContainer'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchCards } from '../actions/simpleAction'
+import SignUp from '../Components/SignUp'
+import Login from '../Components/Login'
 
 class App extends Component {
 
@@ -21,8 +23,9 @@ class App extends Component {
         <Route path='/dashboard'
           component={DashboardContainer}/>
 
+        //This should be swipe container, but switched to signup for testing
           <Route path='/'
-              component={SwipeContainer}/>
+              component={Login}/>
 
       </Switch>
     </React.Fragment>
