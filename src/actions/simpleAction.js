@@ -88,12 +88,64 @@ function createAccount(formData) {
     })
   })
     .then(res => res.json())
-    .then(data => console.log(data.jwt))
+    .then(data => dispatch(createdAccount(data)))
   }
 }
 
-function createdAccount(newUser) {
-  return {type: "CREATED_ACCOUNT", newUser}
+function logIn(formData) {
+  console.log("hit the action", formData)
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/login', {
+      method: "POST",
+      headers: {
+        "Content-type" : "application/json",
+        "Accept" : "application/json"
+      },
+      body: JSON.stringify({user: formData})
+
+      })
+      .then(res=>res.json())
+      // Still need to set up the current user!
+      .then(data => dispatch(loggedIn(data)))
+  }
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount}
+function createdAccount(userDataHash) {
+  if (!!userDataHash.jwt) {
+    return {type: "SET_TOKEN", userDataHash}
+  }
+  else {
+    alert("This username already exists. Please select a unique username.")
+    return {type: "DID_NOT_CREATE_ACCOUNT", userDataHash}
+  }
+}
+
+function loggedIn(userDataHash) {
+  if (!!userDataHash.jwt) {
+    return {type: "SET_TOKEN", userDataHash}
+  }
+  else {
+    alert("Incorrect username and/or password")
+    return {type: "DID_NOT_LOG_IN", userDataHash}
+  }
+}
+
+function settingUser(token) {
+  return dispatch => {
+  fetch('http://localhost:3000/api/v1/profile', {
+    method: "GET",
+    headers: {
+      'Authentication' : `Bearer ${token}`
+    }
+  })
+  .then(res => res.json())
+  .then(data => dispatch(setUser(data)))
+  }
+}
+
+function setUser(user) {
+  return {type: "SET_USER", user}
+}
+
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser}
