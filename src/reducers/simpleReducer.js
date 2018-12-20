@@ -23,12 +23,14 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
       })
       return {...state, userCards: newUserCards}
   case 'SET_TOKEN':
-    console.log(action.userDataHash.user)
-    localStorage.setItem('token', action.userDataHash.jwt)
+    localStorage.setItem('token', action.user.jwt)
     // commented the below line out, but might end up needing it?
     // return {currentUser: action.userDataHash.user}
   case 'SET_USER':
-    return {...state, currentUser: action.user}
+    console.log("ACTION =", action)
+    return {...state, currentUser: action.user.user}
+  case 'RESET_STATE':
+    return {allCards: [], myCards: [], userCards: [], currentUser: null}
   default:
    return state
  }

@@ -1,13 +1,9 @@
 import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { addCardToMyCards, addCardToUserCards, fetchCards } from '../actions/simpleAction'
+import { addCardToMyCards, addCardToUserCards } from '../actions/simpleAction'
 
 class SwipeContainer extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchCards()
-  }
 
   determineCardsNotInQueue = () => {
     var myCardIds = this.props.myCards.map(card => card.id)
@@ -24,12 +20,13 @@ class SwipeContainer extends React.Component {
   }
 
   respondToSwipe = (returnCard, position) => {
+    let currentUser = this.props.currentUser
     this.addCard(returnCard)
     if (position === "left") {
-      this.props.addCardToUserCards(returnCard, false)
+      this.props.addCardToUserCards(returnCard, false, currentUser)
     }
     else if (position === "right") {
-      this.props.addCardToUserCards(returnCard, true)
+      this.props.addCardToUserCards(returnCard, true, currentUser)
     }
   }
 
@@ -57,8 +54,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addCardToMyCards: (card) => {dispatch(addCardToMyCards(card))},
-    addCardToUserCards: (card, liked) => {dispatch(addCardToUserCards(card, liked))},
-    fetchCards: () => {dispatch(fetchCards())}
+    addCardToUserCards: (card, liked, currentUser) => {dispatch(addCardToUserCards(card, liked, currentUser))},
   }
 }
 

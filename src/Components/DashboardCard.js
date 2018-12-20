@@ -5,7 +5,14 @@ import { connect } from 'react-redux'
 import { Image, Grid } from 'semantic-ui-react'
 
 
+
+
 const DashboardCard = (props, completed) => {
+
+  const determineUserCard = () => {
+    let userCard = props.userCards.filter(userCard => userCard.card_id === props.card.id)
+    return userCard
+  }
 
   const determineIfComplete = () => {
     if (!props.completed) {
@@ -14,13 +21,16 @@ const DashboardCard = (props, completed) => {
       <input
       type="checkbox"
       name="completed"
-      onChange={() => props.completeCard(props.card)}
+      onChange={() => props.completeCard(props.userCard, props.currentUser, determineUserCard())}
       ></input>
       <label for="completed"> Completed?</label>
       </React.Fragment>)
     }
 
   }
+
+
+
   return(
     <Card className ="dashcard">
       <Card.Content>
@@ -34,8 +44,16 @@ const DashboardCard = (props, completed) => {
 )
 }
 
+const mapStateToProps = state => {
+  return {
+    currentUser: state.reducer.currentUser,
+    myCards: state.reducer.myCards,
+    userCards: state.reducer.userCards
+  }
+}
+
 const mapDispatchToProps = dispatch => ({
-  completeCard: (card) => {dispatch(completeCard(card))}
+  completeCard: (card, currentUser, userCard) => {dispatch(completeCard(card, currentUser, userCard))}
 })
 
-export default connect(null, mapDispatchToProps)(DashboardCard)
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardCard)

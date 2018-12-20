@@ -1,7 +1,9 @@
 import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Button } from 'semantic-ui-react'
+import { logOut } from '../actions/simpleAction'
+
 
 
 class Header extends React.Component {
@@ -21,9 +23,17 @@ class Header extends React.Component {
       </a>
       <Link className="item ui header" to='/'>Home</Link>
       <NavLink className="item ui header" to='/dashboard'>Dashboard</NavLink>
+      <Button
+        onClick={() => this.props.logOut()}>Log Out</Button>
     </div>
   )
   }
 }
 
-export default connect()(Header)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logOut: (token) => {dispatch(logOut(token))}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Header)

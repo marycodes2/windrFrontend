@@ -6,24 +6,27 @@ function fetchedMyCards(cardData){
   return {type: "FETCH_MY_CARDS", cardData}
 }
 
-function fetchCards() {
+function fetchCards(data) {
+  if (data.user) {
   return dispatch => {
     fetch('http://localhost:3000/api/v1/cards')
     .then(res => res.json())
     .then(data => dispatch(fetchedAllCards(data)))
-    .then(fetch(`http://localhost:3000/api/v1/users/${1}`)
+    .then(fetch(`http://localhost:3000/api/v1/users/${data.user.id}`)
     .then(result => result.json())
     .then(cardData => dispatch(fetchedMyCards(cardData))))
   }
+}
 }
 
 function completedCard(data) {
   return {type: "COMPLETE_CARD", data}
 }
 
-function completeCard(card) {
+function completeCard(card, currentUser, userCard) {
+  console.log("CURRENT USER", currentUser, "usercard", userCard)
   return dispatch => {
-    fetch(`http://localhost:3000/api/v1/user_cards/${card.id}`, {
+    fetch(`http://localhost:3000/api/v1/user_cards/${userCard[0].id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -31,8 +34,8 @@ function completeCard(card) {
       },
       body: JSON.stringify({
         completed: true,
-        card_id: card.id,
-        user_id: 1
+        // card_id: card.id,
+        user_id: currentUser.id
       })
     })
     .then(res => res.json())
@@ -44,7 +47,8 @@ function addedCardToUserCards(addedCard) {
   return {type: "ADD_CARD_TO_USER_CARDS", addedCard}
 }
 
-function addCardToUserCards(card, liked) {
+function addCardToUserCards(card, liked, userCard) {
+  // console.log("CARD IS", card)
   return dispatch => {
     fetch('http://localhost:3000/api/v1/user_cards', {
       method: "POST",
@@ -53,7 +57,7 @@ function addCardToUserCards(card, liked) {
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        user_id: 1,
+        user_id: userCard.id,
         card_id: card.id,
         completed: false,
         expired: false,
@@ -93,7 +97,7 @@ function createAccount(formData) {
 }
 
 function logIn(formData) {
-  console.log("hit the action", formData)
+  // console.log("hit the action", formData)
   return dispatch => {
     fetch('http://localhost:3000/api/v1/login', {
       method: "POST",
@@ -110,23 +114,23 @@ function logIn(formData) {
   }
 }
 
-function createdAccount(userDataHash) {
-  if (!!userDataHash.jwt) {
-    return {type: "SET_TOKEN", userDataHash}
+function createdAccount(user) {
+  if (!!user.jwt) {
+    return {type: "SET_TOKEN", user}
   }
   else {
     alert("This username already exists. Please select a unique username.")
-    return {type: "DID_NOT_CREATE_ACCOUNT", userDataHash}
+    return {type: "DID_NOT_CREATE_ACCOUNT", user}
   }
 }
 
-function loggedIn(userDataHash) {
-  if (!!userDataHash.jwt) {
-    return {type: "SET_TOKEN", userDataHash}
+function loggedIn(user) {
+  if (!!user.jwt) {
+    return {type: "SET_TOKEN", user}
   }
   else {
     alert("Incorrect username and/or password")
-    return {type: "DID_NOT_LOG_IN", userDataHash}
+    return {type: "DID_NOT_LOG_IN", user}
   }
 }
 
@@ -139,7 +143,12 @@ function settingUser(token) {
     }
   })
   .then(res => res.json())
-  .then(data => dispatch(setUser(data)))
+  .then(data => {
+    if (!data.error) {
+    console.log("DATA", data)
+    dispatch(fetchCards(data))
+    dispatch(setUser(data))}
+  })
   }
 }
 
@@ -147,5 +156,8 @@ function setUser(user) {
   return {type: "SET_USER", user}
 }
 
+function logOut() {
+  return {type: "RESET_STATE"}
+}
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser}
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut}

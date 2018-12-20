@@ -9,12 +9,15 @@ import GetToSwiping from '../Components/GetToSwiping'
 class DashboardContainer extends React.Component {
 
   determineQueueCards = () => {
-    const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked && (!userCard.expired))).map(card => card.id)
+    const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked)).map(card => card.card_id)
+    console.log("USER CARDS", this.props.userCards)
+    console.log("MY CARDS", this.props.myCards)
+    console.log("UNCOMPLETED USER CARD IDS", uncompletedUserCardIds)
     return this.props.myCards.filter(card => uncompletedUserCardIds.includes(card.id))
   }
 
   determineCompletedCards = () => {
-    const completedUserCardIds = this.props.userCards.filter(userCard => userCard.completed).map(card => card.id)
+    const completedUserCardIds = this.props.userCards.filter(userCard => userCard.completed).map(card => card.card_id)
     return this.props.myCards.filter(card => completedUserCardIds.includes(card.id))
   }
 
@@ -27,7 +30,11 @@ class DashboardContainer extends React.Component {
               {(this.determineQueueCards().length < 1) ? <h4><i>No cards in your queue! <br></br><br></br> <GetToSwiping /></i></h4> : null}
               <Card.Group itemsPerRow={4}>
                   {this.determineQueueCards().map(card =>
-                  <DashboardCard card={card} completed={false} key={card.id}/> )}
+                  <DashboardCard
+                    card={card}
+                    completed={false}
+                    key={card.id}
+                    /> )}
               </Card.Group>
           </Grid.Column>
         </Grid.Row>
