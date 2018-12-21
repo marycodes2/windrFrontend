@@ -2,6 +2,8 @@ import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
 import { addCardToMyCards, addCardToUserCards, settingUser } from '../actions/simpleAction'
+import { Loader } from 'semantic-ui-react'
+
 
 class SwipeContainer extends React.Component {
 
@@ -40,6 +42,13 @@ class SwipeContainer extends React.Component {
   }
 
   render() {
+    if (!this.props.loaded) {
+      return <div
+          id="swipe"
+          className="ui one column grid cards">
+          <Loader active inline='centered' />
+        </div>
+    }
     return(
       <div
         id="swipe"
@@ -56,7 +65,8 @@ const mapStateToProps = state => {
     myCards: state.reducer.myCards,
     allCards: state.reducer.allCards,
     userCards: state.reducer.userCards,
-    currentUser: state.reducer.currentUser
+    currentUser: state.reducer.currentUser,
+    loaded: state.reducer.myCardsLoaded
   }
 }
 

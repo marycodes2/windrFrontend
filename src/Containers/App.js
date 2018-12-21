@@ -7,14 +7,17 @@ import { connect } from 'react-redux'
 import SignUp from '../Components/SignUp'
 import Login from '../Components/Login'
 import { settingUser, fetchCards } from '../actions/simpleAction'
+import { Loader } from 'semantic-ui-react'
+
 
 class App extends Component {
 
   componentDidMount() {
-
+    console.warn("Mounting app")
+    console.warn(this.props.allCards.length)
     let token = localStorage.getItem('token')
     console.log("token is equal to ", token)
-    if (token) {
+    if (token && this.props.allCards.length < 1) {
       this.props.settingUser(token)
       // this.props.fetchCards()
     }
@@ -22,6 +25,7 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <React.Fragment>
         <Header color={"blue"}/>
@@ -34,7 +38,7 @@ class App extends Component {
 
         <Route exact path='/login' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <Login />}/>
 
-        <Route exact path='/dashboard' render={() => this.props.currentUser ? <DashboardContainer/> : <Redirect to='/login'/>}/>
+        <Route exact path='/dashboard' render={() => this.props.currentUser ? <DashboardContainer/> : <Login />}/>
 
         <Route exact path='/signup' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <SignUp />}/>
 
