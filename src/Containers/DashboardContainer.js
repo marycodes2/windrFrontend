@@ -2,7 +2,7 @@ import React from 'react'
 import DashboardCard from '../Components/DashboardCard'
 import { connect } from 'react-redux'
 import { Grid, Card } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import GetToSwiping from '../Components/GetToSwiping'
 
 
@@ -10,9 +10,6 @@ class DashboardContainer extends React.Component {
 
   determineQueueCards = () => {
     const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked)).map(card => card.card_id)
-    console.log("USER CARDS", this.props.userCards)
-    console.log("MY CARDS", this.props.myCards)
-    console.log("UNCOMPLETED USER CARD IDS", uncompletedUserCardIds)
     return this.props.myCards.filter(card => uncompletedUserCardIds.includes(card.id))
   }
 

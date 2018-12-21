@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Header, Icon, Image, Button } from 'semantic-ui-react'
+import { Form, Header, Icon, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logIn } from '../actions/simpleAction'
@@ -12,7 +12,6 @@ class Login extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log("attempting to log in with", this.state.username, this.state.password)
     let formData = {
       username: this.state.username,
       password: this.state.password

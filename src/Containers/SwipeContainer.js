@@ -9,7 +9,6 @@ class SwipeContainer extends React.Component {
 
   componentDidMount() {
     let token = localStorage.getItem('token')
-    console.log("token is equal to ", token)
     if (token && this.props.allCards.length < 1) {
       this.props.settingUser(token)
       // this.props.fetchCards()
@@ -34,11 +33,17 @@ class SwipeContainer extends React.Component {
     let currentUser = this.props.currentUser
     this.addCard(returnCard)
     if (position === "left") {
-      this.props.addCardToUserCards(returnCard, false, currentUser)
+      // this.props.addCardToUserCards(returnCard, false, currentUser)
     }
     else if (position === "right") {
       this.props.addCardToUserCards(returnCard, true, currentUser)
     }
+  }
+
+  returnRandomCard() {
+    let arr = this.determineCardsNotInQueue()
+    var rand = arr[Math.floor(Math.random() * arr.length)]
+    return rand
   }
 
   render() {
@@ -53,6 +58,7 @@ class SwipeContainer extends React.Component {
       <div
         id="swipe"
         className="ui one column grid cards">
+
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
         <React.Fragment> <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/> </React.Fragment>)}
       </div>

@@ -24,7 +24,6 @@ function completedCard(data) {
 }
 
 function completeCard(card, currentUser, userCard) {
-  console.log("CURRENT USER", currentUser, "usercard", userCard)
   return dispatch => {
     fetch(`http://localhost:3000/api/v1/user_cards/${userCard[0].id}`, {
       method: "PATCH",
@@ -145,7 +144,6 @@ function settingUser(token) {
   .then(res => res.json())
   .then(data => {
     if (!data.error) {
-    console.log("DATA", data)
     dispatch(fetchCards(data))
     dispatch(setUser(data))}
   })

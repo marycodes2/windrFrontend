@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card, Icon } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import { completeCard } from '../actions/simpleAction'
 import { connect } from 'react-redux'
-import { Image, Grid } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 
 
 

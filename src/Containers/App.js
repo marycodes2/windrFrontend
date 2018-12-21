@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import SignUp from '../Components/SignUp'
 import Login from '../Components/Login'
 import { settingUser, fetchCards } from '../actions/simpleAction'
-import { Loader } from 'semantic-ui-react'
 
 
 class App extends Component {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Header, Icon, Image, Button } from 'semantic-ui-react'
+import { Form, Header, Icon, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { createAccount } from '../actions/simpleAction'
 import { Link } from 'react-router-dom'
