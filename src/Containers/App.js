@@ -38,6 +38,8 @@ class App extends Component {
 
         <Route exact path='/signup' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <SignUp />}/>
 
+        <Route path='/' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <Redirect to='/login'/>}/>
+
       </Switch>
     </React.Fragment>
     )
