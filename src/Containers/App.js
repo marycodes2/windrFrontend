@@ -13,10 +13,10 @@ import { Loader } from 'semantic-ui-react'
 class App extends Component {
 
   componentDidMount() {
-    console.warn("Mounting app")
-    console.warn(this.props.allCards.length)
+    // console.warn("Mounting app")
+    // console.warn(this.props.allCards.length)
     let token = localStorage.getItem('token')
-    console.log("token is equal to ", token)
+    // console.log("token is equal to ", token)
     if (token && this.props.allCards.length < 1) {
       this.props.settingUser(token)
       // this.props.fetchCards()
@@ -31,7 +31,6 @@ class App extends Component {
         <Header color={"blue"}/>
       <Switch>
 
-        //This should be swipe container, but switched to signup for testing
         <Route exact path='/' render={() => <Redirect to="/profile"/> } />
 
         <Route exact path='/profile' render={() => this.props.currentUser ? <SwipeContainer/> : <Redirect to='/login'/>}/>
