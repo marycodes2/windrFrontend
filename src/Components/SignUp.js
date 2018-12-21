@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Input, Header, Icon, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { createAccount } from '../actions/simpleAction'
+import { Link } from 'react-router-dom'
 
 class SignUp extends React.Component {
 
@@ -42,9 +43,10 @@ class SignUp extends React.Component {
       </Form.Group>
       </Form>
       <br></br>
-      <br></br>
       <Image src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7ZgI6nQMnITAGgaOvboldvLE7BruEsXITrb4nw__gqXejS6L7yg' size='medium' rounded />
-      </div>
+      <br></br>
+      <Button as={Link} to='/login'>Log in to your Account</Button>
+    </div>
     )
   }
 }

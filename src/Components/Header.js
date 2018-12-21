@@ -7,6 +7,16 @@ import { logOut } from '../actions/simpleAction'
 
 
 class Header extends React.Component {
+
+  showLogoutButton = () => {
+    if (this.props.currentUser) {
+      return <NavLink
+        onClick={() => this.props.logOut()}
+        className="item ui header"
+        to='/login'
+        >Log Out</NavLink>
+    }
+  }
   render(){
   return(
     <div
@@ -23,10 +33,16 @@ class Header extends React.Component {
       </a>
       <Link className="item ui header" to='/'>Home</Link>
       <NavLink className="item ui header" to='/dashboard'>Dashboard</NavLink>
-      <Button
-        onClick={() => this.props.logOut()}>Log Out</Button>
+      {this.showLogoutButton()}
+
     </div>
   )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.reducer.currentUser
   }
 }
 
@@ -36,4 +52,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

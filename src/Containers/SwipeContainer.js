@@ -1,9 +1,18 @@
 import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { addCardToMyCards, addCardToUserCards } from '../actions/simpleAction'
+import { addCardToMyCards, addCardToUserCards, settingUser } from '../actions/simpleAction'
 
 class SwipeContainer extends React.Component {
+
+  componentDidMount() {
+    let token = localStorage.getItem('token')
+    console.log("token is equal to ", token)
+    if (token) {
+      this.props.settingUser(token)
+      // this.props.fetchCards()
+    }
+  }
 
   determineCardsNotInQueue = () => {
     var myCardIds = this.props.myCards.map(card => card.id)
@@ -55,6 +64,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addCardToMyCards: (card) => {dispatch(addCardToMyCards(card))},
     addCardToUserCards: (card, liked, currentUser) => {dispatch(addCardToUserCards(card, liked, currentUser))},
+    settingUser: (token) => {dispatch(settingUser(token))}
   }
 }
 

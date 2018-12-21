@@ -34,9 +34,9 @@ class App extends Component {
 
         <Route exact path='/login' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <Login />}/>
 
-        <Route exact path='/dashboard' component={DashboardContainer}/>
+        <Route exact path='/dashboard' render={() => this.props.currentUser ? <DashboardContainer/> : <Redirect to='/login'/>}/>
 
-        <Route exact path='/signup' component={SignUp}/>
+        <Route exact path='/signup' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <SignUp />}/>
 
       </Switch>
     </React.Fragment>
