@@ -7,6 +7,10 @@ import { Loader } from 'semantic-ui-react'
 
 class SwipeContainer extends React.Component {
 
+  state = {
+    lastCard: {}
+  }
+
   componentDidMount() {
     let token = localStorage.getItem('token')
     if (token && this.props.allCards.length < 1) {
@@ -31,11 +35,12 @@ class SwipeContainer extends React.Component {
 
   respondToSwipe = (returnCard, position) => {
     let currentUser = this.props.currentUser
-    this.addCard(returnCard)
     if (position === "left") {
       // this.props.addCardToUserCards(returnCard, false, currentUser)
+      this.setState({lastCard: returnCard})
     }
     else if (position === "right") {
+      this.addCard(returnCard)
       this.props.addCardToUserCards(returnCard, true, currentUser)
     }
   }
@@ -43,6 +48,9 @@ class SwipeContainer extends React.Component {
   returnRandomCard() {
     let arr = this.determineCardsNotInQueue()
     var rand = arr[Math.floor(Math.random() * arr.length)]
+    if (this.state.lastCard === rand) {
+      var rand = this.returnRandomCard()
+    }
     return rand
   }
 
@@ -54,15 +62,27 @@ class SwipeContainer extends React.Component {
           <Loader active inline='centered' />
         </div>
     }
-    return(
-      <div
-        id="swipe"
-        className="ui one column grid cards">
-
-        {this.determineCardsNotInQueue().slice(0, 1).map(card =>
-        <React.Fragment> <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/> </React.Fragment>)}
-      </div>
-    )
+    else if (this.determineCardsNotInQueue().length < 2) {
+      return <div
+          id="swipe"
+          className="ui one column grid cards">
+          No cards left to swipe!
+        </div>
+    }
+    else {
+      let x = this.returnRandomCard()
+      if (x) {
+      console.log("Hitting in render...", x)
+      return (
+        <div
+          id="swipe"
+          className="ui one column grid cards">
+          <Card card={x} key={x.id} respondToSwipe={(x, position) => this.respondToSwipe(x, position)}/>
+        </div>) }
+      else {
+        return <div>No more cards left!</div>
+      }
+      }
   }
 }
 
