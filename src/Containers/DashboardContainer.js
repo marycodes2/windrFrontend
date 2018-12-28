@@ -6,13 +6,11 @@ import {Link} from 'react-router-dom'
 import GetToSwiping from '../Components/GetToSwiping'
 
 
+
 class DashboardContainer extends React.Component {
 
   determineQueueCards = () => {
     const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked)).map(card => card.card_id)
-    console.log("USER CARDS", this.props.userCards)
-    console.log("MY CARDS", this.props.myCards)
-    console.log("UNCOMPLETED USER CARD IDS", uncompletedUserCardIds)
     return this.props.myCards.filter(card => uncompletedUserCardIds.includes(card.id))
   }
 
@@ -21,9 +19,25 @@ class DashboardContainer extends React.Component {
     return this.props.myCards.filter(card => completedUserCardIds.includes(card.id))
   }
 
+  determineLeaderBoard = () => {
+
+  }
+
   render(){
     return(
-      <Grid celled padded>
+      <Grid celled padded columns={2}>
+
+        <Grid.Row>
+          <Grid.Column padded>
+            <h3>My Score</h3>
+              <h4>{this.props.currentUser.score} Points</h4>
+          </Grid.Column>
+          <Grid.Column padded>
+            <h3>LeaderBoard</h3>
+              <h4>Fill out leaderboard...</h4>
+          </Grid.Column>
+        </Grid.Row>
+
         <Grid.Row>
           <Grid.Column padded>
             <h3>Queue</h3>
@@ -58,7 +72,8 @@ class DashboardContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     myCards: state.reducer.myCards,
-    userCards: state.reducer.userCards
+    userCards: state.reducer.userCards,
+    currentUser: state.reducer.currentUser
   }
 }
 

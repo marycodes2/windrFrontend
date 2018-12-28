@@ -24,7 +24,6 @@ function completedCard(data) {
 }
 
 function completeCard(card, currentUser, userCard) {
-  console.log("CURRENT USER", currentUser, "usercard", userCard)
   return dispatch => {
     fetch(`http://localhost:3000/api/v1/user_cards/${userCard[0].id}`, {
       method: "PATCH",
@@ -88,7 +87,8 @@ function createAccount(formData) {
         name: formData.name,
         zipcode: formData.zipcode,
         access_type: 'user',
-        avatar: 'https://images-na.ssl-images-amazon.com/images/I/A15dQM39ELL._CR0,0,3840,2880_._SL1000_.jpg'
+        avatar: 'https://images-na.ssl-images-amazon.com/images/I/A15dQM39ELL._CR0,0,3840,2880_._SL1000_.jpg',
+        score: 0
       }
     })
   })
@@ -146,7 +146,6 @@ function settingUser(token) {
   .then(res => res.json())
   .then(data => {
     if (!data.error) {
-    console.log("DATA", data)
     dispatch(fetchCards(data))
     dispatch(setUser(data))}
   })
@@ -161,4 +160,44 @@ function logOut() {
   return {type: "RESET_STATE"}
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut}
+function addBulbToUser(bulbs, points, userId) {
+  return (dispatch, getState) => {
+    // console.log("STATE:", getState().reducer.currentUser.score)
+    let oldPoints = getState().reducer.currentUser.score
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        upgraded_bulbs: bulbs,
+        score: oldPoints + points
+      })
+    })
+    .then(res => res.json())
+    .then(userData => dispatch(addPoints(userData)))
+  }
+}
+
+function addPoints(userData) {
+  return {type: "ADD_POINTS", userData}
+}
+
+function getUsers() {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/users')
+    .then(res => res.json())
+    .then(data => dispatch(createUsersHash(data)))
+  }
+}
+
+function createUsersHash(data) {
+  let usersHash = {}
+  data.forEach(user => (
+    usersHash[user.username] = user.score))
+  return {type: 'CREATE_USERS_HASH', usersHash}
+}
+
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers}

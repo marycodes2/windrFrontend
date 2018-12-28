@@ -1,6 +1,6 @@
 // import {combineReducers} from "redux"
 
-export default (state = {allCards: [], myCards: [], userCards: [], currentUser: null, myCardsLoaded: false}, action) => {
+export default (state = {allCards: [], myCards: [], userCards: [], currentUser: null, myCardsLoaded: false, usersHash: {}}, action) => {
  switch (action.type) {
   case 'FETCH_ALL_CARDS':
    return {...state, allCards: action.cards}
@@ -28,11 +28,15 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
     // commented the below line out, but might end up needing it?
     // return {currentUser: action.userDataHash.user}
   case 'SET_USER':
-    console.log("ACTION =", action)
+    // console.log("ACTION =", action)
     return {...state, currentUser: action.user.user}
   case 'RESET_STATE':
     localStorage.removeItem('token')
     return {allCards: [], myCards: [], userCards: [], currentUser: null}
+  case 'CREATE_USERS_HASH':
+    return {...state, usersHash: action.usersHash}
+  case 'ADD_POINTS':
+    return {...state, currentUser: action.userData}
   default:
    return state
  }

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Form, Input, Header, Icon, Image, Button } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { addBulbToUser } from '../actions/simpleAction'
 
-
-export default class LightBulbForm extends React.Component {
+class LightBulbForm extends React.Component {
 
   state = {
     bulbs: 0
@@ -11,6 +12,10 @@ export default class LightBulbForm extends React.Component {
   handleSubmit = () => {
     this.props.resToClick()
     this.props.completeCard()
+    let bulbs = this.state.bulbs
+    let points = this.props.card.score * bulbs
+    let userId = this.props.currentUser.id
+    this.props.addBulbToUser(bulbs, points, userId)
   }
 
   render() {
@@ -44,3 +49,15 @@ export default class LightBulbForm extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.reducer.currentUser
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  addBulbToUser: (bulbs, points, userId) => {dispatch(addBulbToUser(bulbs, points, userId))}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LightBulbForm)

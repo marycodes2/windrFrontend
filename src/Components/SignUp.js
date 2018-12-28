@@ -38,7 +38,7 @@ class SignUp extends React.Component {
         <Form.Group widths={2}>
 
           <Form.Input required placeholder="Name" label='Name' name="name" onChange={(event) => {this.setState({name: event.target.value})}}/>
-          <Form.Input required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
+          <Form.Input type="number" required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
           <Form.Input required placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
           <Form.Input required type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
 

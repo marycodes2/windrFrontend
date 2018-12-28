@@ -12,7 +12,7 @@ class Login extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log("attempting to log in with", this.state.username, this.state.password)
+    // console.log("attempting to log in with", this.state.username, this.state.password)
     let formData = {
       username: this.state.username,
       password: this.state.password
