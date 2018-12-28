@@ -5,6 +5,10 @@ import { addBulbToUser } from '../actions/simpleAction'
 
 class LightBulbForm extends React.Component {
 
+  // saving for later
+  // <Icon name='star' />
+  // {this.props.card.stars}/5 Energy-Saving Stars
+
   state = {
     bulbs: 0
   }
@@ -16,6 +20,21 @@ class LightBulbForm extends React.Component {
     let points = this.props.card.score * bulbs
     let userId = this.props.currentUser.id
     this.props.addBulbToUser(bulbs, points, userId)
+  }
+
+  determineNumDollarSigns = () => {
+    let returnValue = []
+    let i = 0
+    while (i < this.props.card.upfront_cost) {
+      returnValue.push(<Icon color="green" bold fitted name='dollar' />)
+      i++
+    }
+    let j = returnValue.length
+    while (j < 5) {
+      returnValue.push(<Icon color="grey" fitted name='dollar' />)
+      j++
+    }
+    return returnValue
   }
 
   render() {
@@ -36,14 +55,12 @@ class LightBulbForm extends React.Component {
       <Icon name='dollar sign' />
       {this.props.card.dollar_savings* 5 * this.state.bulbs} Saved Over 5 Years
       <br/>
-      <Icon name='dollar sign' />
-      {this.props.card.upfront_cost * this.state.bulbs} Upfront Cost
-      <br/>
       <Icon name='plus square outline'/>
       {this.props.card.score * this.state.bulbs} Windr Points
       <br></br>
-      <Icon name='star' />
-      {this.props.card.stars}/5 Energy-Saving Stars
+      Upfront Cost: {this.determineNumDollarSigns()}
+      <br></br>
+
       <br/>
       </div>
     )
