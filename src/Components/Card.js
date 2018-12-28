@@ -51,7 +51,7 @@ export default class WindrCard extends React.Component {
   render(){
     return(
     <Card
-      className="ui centered card"
+      className="ui centered raised card"
       id={`card-${this.props.card.id}`}
       image={require(`../images/${this.props.card.image}.jpg`)}
       header={this.props.card.name}
@@ -60,17 +60,8 @@ export default class WindrCard extends React.Component {
       extra={
       <React.Fragment>
       <a>
-        <Icon name='dollar sign' />
-        {this.props.card.dollar_savings* 5} Saved Over 5 Years
-        <br/>
-        <Icon name='dollar sign' />
-        {this.props.card.upfront_cost} Upfront Cost
-        <br/>
-        <Icon name='envira' />
-        {this.props.card.co2_savings} lbs Carbon Dioxide Saved
-        <br/>
         <Icon name='plus square outline'/>
-        {this.props.card.score} Points
+        {this.props.card.score} points per action
       </a>
       </React.Fragment>
       }

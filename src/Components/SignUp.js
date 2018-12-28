@@ -9,12 +9,14 @@ class SignUp extends React.Component {
   state = {
     name: "",
     username: "",
-    password: ""
+    password: "",
+    zipcode: ""
   }
 
   handleSubmit = () => {
     let formData = {
       name: this.state.name,
+      zipcode: parseInt(this.state.zipcode),
       username: this.state.username,
       password: this.state.password
     }
@@ -36,6 +38,7 @@ class SignUp extends React.Component {
         <Form.Group widths={2}>
 
           <Form.Input required placeholder="Name" label='Name' name="name" onChange={(event) => {this.setState({name: event.target.value})}}/>
+          <Form.Input required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
           <Form.Input required placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
           <Form.Input required type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
 

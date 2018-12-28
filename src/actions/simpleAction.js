@@ -86,6 +86,7 @@ function createAccount(formData) {
         username: formData.username,
         password: formData.password,
         name: formData.name,
+        zipcode: formData.zipcode,
         access_type: 'user',
         avatar: 'https://images-na.ssl-images-amazon.com/images/I/A15dQM39ELL._CR0,0,3840,2880_._SL1000_.jpg'
       }

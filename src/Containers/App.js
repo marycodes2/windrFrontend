@@ -28,11 +28,12 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <Header color={"blue"}/>
+        <Header />
       <Switch>
 
         <Route exact path='/' render={() => <Redirect to="/profile"/> } />
 
+        // Should be SwipeContainer, changing to DataForm for testing
         <Route exact path='/profile' render={() => this.props.currentUser ? <SwipeContainer/> : <Redirect to='/login'/>}/>
 
         <Route exact path='/login' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <Login />}/>

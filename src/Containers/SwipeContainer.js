@@ -19,7 +19,7 @@ class SwipeContainer extends React.Component {
   determineCardsNotInQueue = () => {
     var myCardIds = this.props.myCards.map(card => card.id)
 
-    let cardsNotInQueue = this.props.allCards.filter(card =>
+    var cardsNotInQueue = this.props.allCards.filter(card =>
       !(myCardIds.includes(card.id)))
 
     return cardsNotInQueue
@@ -48,6 +48,13 @@ class SwipeContainer extends React.Component {
           className="ui one column grid cards">
           <Loader active inline='centered' />
         </div>
+    }
+    else if (this.determineCardsNotInQueue().length === 0) {
+      return <div
+        id="swipe"
+        className="ui one column grid cards">
+        No cards left to swipe!
+      </div>
     }
     return(
       <div
