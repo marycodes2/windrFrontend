@@ -4,11 +4,14 @@ import { connect } from 'react-redux'
 import { Grid, Card } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import GetToSwiping from '../Components/GetToSwiping'
-
+import { getUsers } from '../actions/simpleAction'
 
 
 class DashboardContainer extends React.Component {
 
+  componentDidMount() {
+    this.props.getUsers()
+  }
   determineQueueCards = () => {
     const uncompletedUserCardIds = this.props.userCards.filter(userCard => (!(userCard.completed) && userCard.liked)).map(card => card.card_id)
     return this.props.myCards.filter(card => uncompletedUserCardIds.includes(card.id))
@@ -20,6 +23,23 @@ class DashboardContainer extends React.Component {
   }
 
   determineLeaderBoard = () => {
+    if (this.props.usersHash) {
+    let usersHash = this.props.usersHash
+    let usernames = Object.keys(usersHash)
+    let sortedUsernames = usernames.sort(function(a, b) {
+      return usersHash[a] - usersHash[b]
+    })
+    // sortedUsernames = sortedUsernames.reverse()
+    console.log("sortedusernames", sortedUsernames.reverse())
+    let returnValue = []
+    let i = 0
+    while (i < 5 || i < sortedUsernames.length) {
+      returnValue.push(`${i+1}. ${sortedUsernames[i]} - ${usersHash[sortedUsernames[i]]}`)
+      i++
+    }
+    return returnValue
+  }
+
 
   }
 
@@ -34,7 +54,7 @@ class DashboardContainer extends React.Component {
           </Grid.Column>
           <Grid.Column padded>
             <h3>LeaderBoard</h3>
-              <h4>Fill out leaderboard...</h4>
+              <h4>{this.determineLeaderBoard().map(leader => <p>{leader}</p>)}</h4>
           </Grid.Column>
         </Grid.Row>
 
@@ -73,8 +93,15 @@ const mapStateToProps = state => {
   return {
     myCards: state.reducer.myCards,
     userCards: state.reducer.userCards,
-    currentUser: state.reducer.currentUser
+    currentUser: state.reducer.currentUser,
+    usersHash: state.reducer.usersHash
   }
 }
 
-export default connect(mapStateToProps)(DashboardContainer)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUsers: () => {dispatch(getUsers())}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer)

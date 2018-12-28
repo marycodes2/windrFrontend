@@ -19,7 +19,7 @@ class App extends Component {
     // console.log("token is equal to ", token)
     if (token && this.props.allCards.length < 1) {
       this.props.settingUser(token)
-      this.props.getUsers()
+
       // this.props.fetchCards()
     }
     // console.log("current user is", this.props.currentUser)
