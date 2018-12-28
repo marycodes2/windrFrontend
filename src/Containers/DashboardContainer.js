@@ -71,7 +71,7 @@ class DashboardContainer extends React.Component {
           <Grid.Column padded>
             <h3>Queue</h3>
               {(this.determineQueueCards().length < 1) ? <h4><i>No cards in your queue! <br></br><br></br> <GetToSwiping /></i></h4> : null}
-              <Card.Group itemsPerRow={4}>
+              <Card.Group itemsPerRow={1}>
                   {this.determineQueueCards().map(card =>
                   <DashboardCard
                     card={card}
@@ -86,7 +86,7 @@ class DashboardContainer extends React.Component {
           <Grid.Column padded>
             <h3>Completed</h3>
             {(this.determineCompletedCards().length < 1) ? <h4><i>You have not completed any cards!</i></h4> : null}
-            <Card.Group itemsPerRow={4}>
+            <Card.Group itemsPerRow={1}>
               {this.determineCompletedCards().map(card =>
               <DashboardCard card={card} completed={true} key={card.id}/>   )}
             </Card.Group>

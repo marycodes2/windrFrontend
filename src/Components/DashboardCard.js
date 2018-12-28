@@ -18,11 +18,23 @@ const DashboardCard = (props, completed) => {
     if (!props.completed) {
       return (<MoreInfoModal card={props.card}/>)
     }
+    else {
+      return (<React.Fragment>
+      <a>
+        <Icon name='plus square outline'/>
+        {props.card.score} points per action
+        <br></br>
+        <Icon name='star' />
+        {props.card.stars}/5 Energy-Saving Stars
+      </a>
+    </React.Fragment>)
+    }
   }
 
   return(
 
-    <Card className ="dashcard ui raised card">
+    <Card
+      raised>
       <Card.Content>
         <Image floated='right' size='mini' src={require(`../images/${props.card.image}.jpg`)}/>
         <Card.Header>{props.card.name}</Card.Header>
