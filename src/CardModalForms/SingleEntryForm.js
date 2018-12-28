@@ -1,7 +1,6 @@
 import React from 'react'
 import { Form, Input, Header, Icon, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import DetermineNumDollarSigns from './DetermineNumDollarSigns'
 import CreateIcons from './CreateIcons'
 
 class SingleEntryForm extends React.Component {
@@ -16,14 +15,13 @@ class SingleEntryForm extends React.Component {
     let items = this.state.items
     let points = this.props.card.score * items
     let userId = this.props.currentUser.id
-    // need to refactor
     this.props.addItemsToUser(items, points, userId)
   }
 
   render() {
     return(
       <div>
-      <Header as='h4'>{this.props.slogan}</Header>
+      <Header as='h3'>{this.props.slogan}</Header>
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths={2}>
           <Form.Input type="number" required placeholder='0' name="num" onChange={(event) => {this.setState({items: event.target.value})}}/>
