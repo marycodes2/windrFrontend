@@ -29,6 +29,7 @@ class DashboardContainer extends React.Component {
     let sortedUsernames = usernames.sort(function(a, b) {
       return usersHash[a] - usersHash[b]
     })
+    sortedUsernames = sortedUsernames.reverse()
     let returnValue = []
     let i = 0
     while (i < 5 && i < sortedUsernames.length) {
