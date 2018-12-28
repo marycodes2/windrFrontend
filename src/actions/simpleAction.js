@@ -87,7 +87,7 @@ function createAccount(formData) {
         name: formData.name,
         zipcode: formData.zipcode,
         access_type: 'user',
-        avatar: 'https://images-na.ssl-images-amazon.com/images/I/A15dQM39ELL._CR0,0,3840,2880_._SL1000_.jpg',
+        avatar: formData.avatar,
         score: 0
       }
     })
@@ -196,7 +196,7 @@ function createUsersHash(data) {
   let usersHash = {}
   data.forEach(user => (
     usersHash[user.username] = user.score))
-  return {type: 'CREATE_USERS_HASH', usersHash}
+  return {type: 'CREATE_USERS_HASH', data:[usersHash, data]}
 }
 
 

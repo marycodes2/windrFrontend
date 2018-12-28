@@ -10,7 +10,40 @@ class SignUp extends React.Component {
     name: "",
     username: "",
     password: "",
-    zipcode: ""
+    zipcode: "",
+    avatar: "Tyra"
+  }
+
+  avatarOptions = () => {
+    let avatarOptions = [
+  {
+    text: 'Tyra Banks',
+    value: 'Tyra',
+    image: { avatar: true, src: require('../images/Tyra Banks.jpg') },
+  },
+  {
+    text: 'Beyonce',
+    value: 'Beyonce',
+    image: { avatar: true, src: require('../images/Beyonce.jpg') },
+  },
+  {
+    text: 'Ariana Grande',
+    value: 'Ariana',
+    image: { avatar: true, src: require('../images/Ariana Grande.jpg') },
+  },
+  {
+    text: 'Hillary Clinton',
+    value: 'Hillary',
+    image: { avatar: true, src: require('../images/Hillary Clinton.jpg') },
+  },
+  {
+    text: 'Juan Dixon',
+    value: 'Juan',
+    image: { avatar: true, src: require('../images/Juan Dixon.jpg') },
+  } ]
+
+  return avatarOptions
+
   }
 
   handleSubmit = () => {
@@ -18,7 +51,8 @@ class SignUp extends React.Component {
       name: this.state.name,
       zipcode: parseInt(this.state.zipcode),
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      avatar: this.state.avatar
     }
     this.props.createAccount(formData)
   }
@@ -41,6 +75,7 @@ class SignUp extends React.Component {
           <Form.Input type="number" required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
           <Form.Input required placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
           <Form.Input required type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
+          <Form.Dropdown placeholder='Tyra' label='Avatar' fluid selection options={this.avatarOptions()} onChange={(event) => {this.setState({avatar: event.target.innerText})}} />
 
       <Button type='submit'>Submit</Button>
       </Form.Group>

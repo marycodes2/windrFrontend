@@ -5,7 +5,7 @@ import { Grid, Card } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import GetToSwiping from '../Components/GetToSwiping'
 import { getUsers } from '../actions/simpleAction'
-
+import { List, Image } from 'semantic-ui-react'
 
 class DashboardContainer extends React.Component {
 
@@ -33,7 +33,7 @@ class DashboardContainer extends React.Component {
     let returnValue = []
     let i = 0
     while (i < 5 && i < sortedUsernames.length) {
-      returnValue.push(`${i+1}. ${sortedUsernames[i]} - ${usersHash[sortedUsernames[i]]}`)
+      returnValue.push(`${sortedUsernames[i]} - ${usersHash[sortedUsernames[i]]}`)
       i++
     }
     return returnValue
@@ -41,8 +41,15 @@ class DashboardContainer extends React.Component {
   else {
     return []
   }
+  }
 
-
+  determineAvatar(leader) {
+    let username = leader.split(" ")[0]
+    let user = this.props.allUsers.filter(user => (
+      user.username === username
+    ))
+    // console.log("CURRENT USER", user[0].avatar)
+    return <Image avatar src={require(`../images/${user[0].avatar}.jpg`)} />
   }
 
   render(){
@@ -56,7 +63,7 @@ class DashboardContainer extends React.Component {
           </Grid.Column>
           <Grid.Column padded>
             <h3>LeaderBoard</h3>
-              <h4>{this.determineLeaderBoard().map(leader => <p>{leader}</p>)}</h4>
+              <List ordered>{this.determineLeaderBoard().map(leader => <List.Item as='a'> {this.determineAvatar(leader)}  {leader}</List.Item>)}</List>
           </Grid.Column>
         </Grid.Row>
 
@@ -96,7 +103,8 @@ const mapStateToProps = state => {
     myCards: state.reducer.myCards,
     userCards: state.reducer.userCards,
     currentUser: state.reducer.currentUser,
-    usersHash: state.reducer.usersHash
+    usersHash: state.reducer.usersHash,
+    allUsers: state.reducer.allUsers
   }
 }
 

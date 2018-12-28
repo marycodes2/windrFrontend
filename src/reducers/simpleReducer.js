@@ -1,6 +1,6 @@
 // import {combineReducers} from "redux"
 
-export default (state = {allCards: [], myCards: [], userCards: [], currentUser: null, myCardsLoaded: false, usersHash: {}}, action) => {
+export default (state = {allCards: [], myCards: [], userCards: [], currentUser: null, myCardsLoaded: false, allUsers: [], usersHash: {}}, action) => {
  switch (action.type) {
   case 'FETCH_ALL_CARDS':
    return {...state, allCards: action.cards}
@@ -34,7 +34,8 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
     localStorage.removeItem('token')
     return {allCards: [], myCards: [], userCards: [], currentUser: null}
   case 'CREATE_USERS_HASH':
-    return {...state, usersHash: action.usersHash}
+    console.log(action.data[1])
+    return {...state, usersHash: action.data[0], allUsers: action.data[1]}
   case 'ADD_POINTS':
     let newHash = state.usersHash[action.userData.username] = action.userData.score
     return {...state, currentUser: action.userData}
