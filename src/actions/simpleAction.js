@@ -199,5 +199,24 @@ function createUsersHash(data) {
   return {type: 'CREATE_USERS_HASH', data:[usersHash, data]}
 }
 
+function addWindowsToUser(windows, points, userId) {
+  return (dispatch, getState) => {
+    let oldPoints = getState().reducer.currentUser.score
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        upgraded_windows: windows,
+        score: oldPoints + points
+      })
+    })
+    .then(res => res.json())
+    .then(userData => dispatch(addPoints(userData)))
+  }
+}
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers}
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser}

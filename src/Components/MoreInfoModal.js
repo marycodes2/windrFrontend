@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Modal } from 'semantic-ui-react'
-import LightBulbForm from '../CardModalForms/LightBulbForm'
-import { completeCard } from '../actions/simpleAction'
+import { completeCard, addWindowsToUser, addBulbToUser } from '../actions/simpleAction'
 import { connect } from 'react-redux'
+import SingleEntryForm from '../CardModalForms/SingleEntryForm'
 
 
 class MoreInfoModal extends React.Component {
@@ -24,7 +24,23 @@ class MoreInfoModal extends React.Component {
   determineWhichFormToUse = () => {
     switch (this.props.card.id) {
       case 1:
-        return <LightBulbForm card={this.props.card} resToClick={this.close} completeCard={this.completeCard}/>
+      // Light Bulb
+        return <SingleEntryForm
+          card={this.props.card}
+          resToClick={this.close}
+          completeCard={this.completeCard}
+          slogan={"How many bulbs did you upgrade to LEDs?"}
+          addItemsToUser={(bulbs, points, userId) => this.props.addBulbToUser(bulbs, points, userId)}
+          />
+      // Window
+      case 2:
+        return <SingleEntryForm
+          card={this.props.card}
+          resToClick={this.close}
+          completeCard={this.completeCard}
+          slogan={"How many windows did you upgrade?"}
+          addItemsToUser={(windows, points, userId) => this.props.addWindowsToUser(windows, points, userId)}
+          />
   }
 }
 
@@ -58,7 +74,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  completeCard: (card, currentUser, userCard) => {dispatch(completeCard(card, currentUser, userCard))}
+  completeCard: (card, currentUser, userCard) => {dispatch(completeCard(card, currentUser, userCard))},
+  addWindowsToUser: (windows, points, userId) => {dispatch(addWindowsToUser(windows, points, userId))},
+  addBulbToUser: (bulbs, points, userId) => {dispatch(addBulbToUser(bulbs, points, userId))}
 })
 
 

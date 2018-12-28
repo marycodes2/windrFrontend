@@ -24,8 +24,6 @@ const DashboardCard = (props, completed) => {
         <Icon name='plus square outline'/>
         {props.card.score} points per action
         <br></br>
-        <Icon name='star' />
-        {props.card.stars}/5 Energy-Saving Stars
       </a>
     </React.Fragment>)
     }

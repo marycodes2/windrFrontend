@@ -48,19 +48,26 @@ class DashboardContainer extends React.Component {
     let user = this.props.allUsers.filter(user => (
       user.username === username
     ))
-    // console.log("CURRENT USER", user[0].avatar)
     return <Image avatar src={require(`../images/${user[0].avatar}.jpg`)} />
+  }
+
+  returnCurrentUser = () => {
+    if (this.props.currentUser) {
+      return <i><Header center as='h1' textAlign='center'>Hi {this.props.currentUser.name}!</Header></i>
+    }
   }
 
   render(){
     // add 'celled' to Grid below if you want to separate the grids
     return(
+      <React.Fragment>
+      {this.returnCurrentUser()}
       <Grid padded columns={2}>
 
         <Grid.Row>
           <Grid.Column padded>
             <Header as='h3' dividing>My Score</Header>
-            <Header as='h4'>{this.props.currentUser.score} Points</Header>
+            <Header as='h1'>{this.props.currentUser.score} Points</Header>
           </Grid.Column>
 
           <Grid.Column padded>
@@ -82,9 +89,6 @@ class DashboardContainer extends React.Component {
                     /> )}
               </Card.Group>
           </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
           <Grid.Column padded>
             <Header as='h3' dividing>Completed</Header>
             {(this.determineCompletedCards().length < 1) ? <h4><i>You have not completed any cards!</i></h4> : null}
@@ -94,8 +98,8 @@ class DashboardContainer extends React.Component {
             </Card.Group>
           </Grid.Column>
         </Grid.Row>
-
       </Grid>
+      </React.Fragment>
     )
   }
 }
