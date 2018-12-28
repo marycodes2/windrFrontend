@@ -36,6 +36,7 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
   case 'CREATE_USERS_HASH':
     return {...state, usersHash: action.usersHash}
   case 'ADD_POINTS':
+    let newHash = state.usersHash[action.userData.username] = action.userData.score
     return {...state, currentUser: action.userData}
   default:
    return state
