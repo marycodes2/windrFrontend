@@ -15,7 +15,9 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
         if (card.id === action.data.id){
           return {
             ...card,
-            completed: true
+            completed: true,
+            total_windr_score: action.data.total_windr_score,
+            total_dollar_savings: action.data.total_dollar_savings
           }
         } else {
             return card
@@ -34,7 +36,7 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
     localStorage.removeItem('token')
     return {allCards: [], myCards: [], userCards: [], currentUser: null}
   case 'CREATE_USERS_HASH':
-    console.log(action.data[1])
+    // console.log(action.data[1])
     return {...state, usersHash: action.data[0], allUsers: action.data[1]}
   case 'ADD_POINTS':
     let newHash = state.usersHash[action.userData.username] = action.userData.score

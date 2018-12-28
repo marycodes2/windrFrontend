@@ -4,7 +4,7 @@ import { completeCard } from '../actions/simpleAction'
 import { connect } from 'react-redux'
 import { Image, Grid } from 'semantic-ui-react'
 import MoreInfoModal from './MoreInfoModal'
-
+import DetermineNumStars from '../CardModalForms/DetermineNumStars'
 
 
 const DashboardCard = (props, completed) => {
@@ -21,9 +21,15 @@ const DashboardCard = (props, completed) => {
     else {
       return (<React.Fragment>
       <a>
+        <Icon name='dollar sign' />
+        {determineUserCard()[0].total_dollar_savings} Saved per Year
+        <br/>
         <Icon name='plus square outline'/>
-        {props.card.score} points per action
-        <br></br>
+        {determineUserCard()[0].total_windr_score} Windr Points
+        <br/>
+        Upfront Cost: <DetermineNumStars icon={"dollar"} measurement={props.card.upfront_cost}/>
+        <br/>
+        Envira-Stars:  <DetermineNumStars icon={"envira"} measurement={props.card.stars}/>
       </a>
     </React.Fragment>)
     }

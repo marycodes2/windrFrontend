@@ -23,7 +23,7 @@ function completedCard(data) {
   return {type: "COMPLETE_CARD", data}
 }
 
-function completeCard(card, currentUser, userCard) {
+function completeCard(card, currentUser, userCard, total_score, total_dollar_savings) {
   return dispatch => {
     fetch(`http://localhost:3000/api/v1/user_cards/${userCard[0].id}`, {
       method: "PATCH",
@@ -33,6 +33,8 @@ function completeCard(card, currentUser, userCard) {
       },
       body: JSON.stringify({
         completed: true,
+        total_windr_score: total_score,
+        total_dollar_savings: total_dollar_savings,
         // card_id: card.id,
         user_id: currentUser.id
       })
@@ -237,5 +239,42 @@ function addRefrigeratorsToUser(refrigerators, points, userId) {
   }
 }
 
+function addMilesToUser(miles, points, userId) {
+  return (dispatch, getState) => {
+    let oldPoints = getState().reducer.currentUser.score
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        driving_miles_saved_in_week: miles,
+        score: oldPoints + points
+      })
+    })
+    .then(res => res.json())
+    .then(userData => dispatch(addPoints(userData)))
+  }
+}
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addRefrigeratorsToUser}
+function addMonitorsToUser(monitors, points, userId) {
+  return (dispatch, getState) => {
+    let oldPoints = getState().reducer.currentUser.score
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        num_sleep_monitors: monitors,
+        score: oldPoints + points
+      })
+    })
+    .then(res => res.json())
+    .then(userData => dispatch(addPoints(userData)))
+  }
+}
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addRefrigeratorsToUser, addMilesToUser, addMonitorsToUser}

@@ -11,10 +11,11 @@ class SingleEntryForm extends React.Component {
 
   handleSubmit = () => {
     this.props.resToClick()
-    this.props.completeCard()
     let items = this.state.items
+    let total_dollar_savings = this.state.items * this.props.card.dollar_savings
     let points = this.props.card.score * items
     let userId = this.props.currentUser.id
+    this.props.completeCard(points, total_dollar_savings)
     this.props.addItemsToUser(items, points, userId)
   }
 

@@ -31,10 +31,9 @@ class Header extends React.Component {
           <div className="sub header"><i>Keeping the Lights Off</i></div>
         </h2>
       </a>
-      <Link className="item ui header" to='/'>Home</Link>
+      <Link className="item ui header" to='/'>Swipe</Link>
       <NavLink className="item ui header" to='/dashboard'>Dashboard</NavLink>
       {this.showLogoutButton()}
-
     </div>
   )
   }

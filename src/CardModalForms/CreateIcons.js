@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
-import DetermineNumDollarSigns from './DetermineNumDollarSigns'
+import DetermineNumStars from './DetermineNumStars'
 
 
 const CreateIcons = (props) => {
@@ -13,7 +13,9 @@ const CreateIcons = (props) => {
   <Icon name='plus square outline'/>
   {props.card.score * props.item} Windr Points
   <br/>
-  Upfront Cost: <DetermineNumDollarSigns upfrontCost={props.card.upfront_cost}/>
+  Upfront Cost: <DetermineNumStars icon={"dollar"} measurement={props.card.upfront_cost}/>
+  <br/>
+  Envira-Stars: <DetermineNumStars icon={"envira"} measurement={props.card.stars}/>
   <br/><br/>
   </React.Fragment>)
 }

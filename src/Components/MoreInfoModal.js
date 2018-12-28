@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal } from 'semantic-ui-react'
-import { completeCard, addWindowsToUser, addBulbToUser, addRefrigeratorsToUser } from '../actions/simpleAction'
+import { completeCard, addWindowsToUser, addBulbToUser, addRefrigeratorsToUser, addMilesToUser, addMonitorsToUser } from '../actions/simpleAction'
 import { connect } from 'react-redux'
 import SingleEntryForm from '../CardModalForms/SingleEntryForm'
 
@@ -17,8 +17,8 @@ class MoreInfoModal extends React.Component {
     return userCard
   }
 
-  completeCard = () => {
-    this.props.completeCard(this.props.userCard, this.props.currentUser, this.determineUserCard())
+  completeCard = (total_score, total_dollar_savings) => {
+    this.props.completeCard(this.props.userCard, this.props.currentUser, this.determineUserCard(), total_score, total_dollar_savings)
   }
 
   determineWhichFormToUse = () => {
@@ -28,7 +28,7 @@ class MoreInfoModal extends React.Component {
         return <SingleEntryForm
           card={this.props.card}
           resToClick={this.close}
-          completeCard={this.completeCard}
+          completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
           slogan={"How many bulbs did you upgrade to LEDs?"}
           addItemsToUser={(bulbs, points, userId) => this.props.addBulbToUser(bulbs, points, userId)}
           />
@@ -50,6 +50,24 @@ class MoreInfoModal extends React.Component {
           slogan={"How many refrigerators did you upgrade?"}
           addItemsToUser={(refrigerators, points, userId) => this.props.addRefrigeratorsToUser(refrigerators, points, userId)}
           />
+        // Drive Less
+      case 4:
+        return <SingleEntryForm
+          card={this.props.card}
+          resToClick={this.close}
+          completeCard={this.completeCard}
+          slogan={"How many fewer miles did you drive this week?"}
+          addItemsToUser={(miles, points, userId) => this.props.addMilesToUser(miles, points, userId)}
+          />
+        // Monitors
+        case 5:
+          return <SingleEntryForm
+            card={this.props.card}
+            resToClick={this.close}
+            completeCard={this.completeCard}
+            slogan={"On how many monitors did you enable sleep mode??"}
+            addItemsToUser={(monitors, points, userId) => this.props.addMonitorsToUser(monitors, points, userId)}
+            />
   }
 }
 
@@ -82,10 +100,12 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  completeCard: (card, currentUser, userCard) => {dispatch(completeCard(card, currentUser, userCard))},
+  completeCard: (card, currentUser, userCard, total_score, total_dollar_savings) => {dispatch(completeCard(card, currentUser, userCard, total_score, total_dollar_savings))},
   addWindowsToUser: (windows, points, userId) => {dispatch(addWindowsToUser(windows, points, userId))},
   addBulbToUser: (bulbs, points, userId) => {dispatch(addBulbToUser(bulbs, points, userId))},
-  addRefrigeratorsToUser: (bulbs, points, userId) => {dispatch(addRefrigeratorsToUser(bulbs, points, userId))}
+  addRefrigeratorsToUser: (bulbs, points, userId) => {dispatch(addRefrigeratorsToUser(bulbs, points, userId))},
+  addMilesToUser: (bulbs, points, userId) => {dispatch(addRefrigeratorsToUser(bulbs, points, userId))},
+  addMonitorsToUser: (monitors, points, userId) => {dispatch(addMonitorsToUser(monitors, points, userId))}
 })
 
 
