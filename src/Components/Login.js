@@ -43,7 +43,6 @@ class Login extends React.Component {
       </Form.Group>
       </Form>
       <br></br>
-      <Image src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7ZgI6nQMnITAGgaOvboldvLE7BruEsXITrb4nw__gqXejS6L7yg' size='medium' rounded />
       <h1>-OR-</h1>
     <Button as={Link} to='/signup'>Create an Account</Button>
     </div>

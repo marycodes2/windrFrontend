@@ -81,7 +81,6 @@ class SignUp extends React.Component {
       </Form.Group>
       </Form>
       <br></br>
-      <Image src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7ZgI6nQMnITAGgaOvboldvLE7BruEsXITrb4nw__gqXejS6L7yg' size='medium' rounded />
       <br></br>
       <Button as={Link} to='/login'>Log in to your Account</Button>
     </div>

@@ -65,7 +65,7 @@ class MoreInfoModal extends React.Component {
             card={this.props.card}
             resToClick={this.close}
             completeCard={this.completeCard}
-            slogan={"On how many monitors did you enable sleep mode??"}
+            slogan={"On how many monitors did you enable sleep mode?"}
             addItemsToUser={(monitors, points, userId) => this.props.addMonitorsToUser(monitors, points, userId)}
             />
   }
