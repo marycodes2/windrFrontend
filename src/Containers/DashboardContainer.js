@@ -5,7 +5,8 @@ import { Grid, Card } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import GetToSwiping from '../Components/GetToSwiping'
 import { getUsers } from '../actions/simpleAction'
-import { List, Image, Header, Icon } from 'semantic-ui-react'
+import { List, Image, Header, Icon, Segment } from 'semantic-ui-react'
+import CalculateDollarsSaved from '../Components/CalculateDollarsSaved'
 
 class DashboardContainer extends React.Component {
 
@@ -53,7 +54,12 @@ class DashboardContainer extends React.Component {
 
   returnCurrentUser = () => {
     if (this.props.currentUser) {
-      return <i><Header center as='h1' textAlign='center'>Hi {this.props.currentUser.name}!</Header></i>
+      return <div >
+        <Image src={require(`../images/${this.props.currentUser.avatar}.jpg`)} avatar centered />
+        <span>
+          <i><Header as='h1'>Hi {this.props.currentUser.name}!</Header></i>
+        </span>
+      </div>
     }
   }
 
@@ -61,13 +67,20 @@ class DashboardContainer extends React.Component {
     // add 'celled' to Grid below if you want to separate the grids
     return(
       <React.Fragment>
-      {this.returnCurrentUser()}
+      <Grid padded columns={1} textAlign='centered'>
+        <Grid.Row>
+          {this.returnCurrentUser()}
+        </Grid.Row>
+      </Grid>
+
       <Grid padded columns={2}>
 
         <Grid.Row>
           <Grid.Column padded>
             <Header as='h3' dividing>My Score</Header>
             <Header as='h1'>{this.props.currentUser.score} Points</Header>
+            <Header as='h1'><CalculateDollarsSaved /> Saved</Header>
+
           </Grid.Column>
 
           <Grid.Column padded>

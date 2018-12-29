@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal } from 'semantic-ui-react'
-import { completeCard, addWindowsToUser, addBulbToUser, addRefrigeratorsToUser, addMilesToUser, addMonitorsToUser } from '../actions/simpleAction'
+import { completeCard, addWindowsToUser, addBulbToUser, addPointsToUser, addMilesToUser, addMonitorsToUser } from '../actions/simpleAction'
 import { connect } from 'react-redux'
 import SingleEntryForm from '../CardModalForms/SingleEntryForm'
 
@@ -30,6 +30,7 @@ class MoreInfoModal extends React.Component {
           resToClick={this.close}
           completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
           slogan={"How many bulbs did you upgrade to LEDs?"}
+          inputs={true}
           addItemsToUser={(bulbs, points, userId) => this.props.addBulbToUser(bulbs, points, userId)}
           />
       // Window
@@ -38,6 +39,7 @@ class MoreInfoModal extends React.Component {
           card={this.props.card}
           resToClick={this.close}
           completeCard={this.completeCard}
+          inputs={true}
           slogan={"How many windows did you upgrade?"}
           addItemsToUser={(windows, points, userId) => this.props.addWindowsToUser(windows, points, userId)}
           />
@@ -47,14 +49,16 @@ class MoreInfoModal extends React.Component {
           card={this.props.card}
           resToClick={this.close}
           completeCard={this.completeCard}
-          slogan={"How many refrigerators did you upgrade?"}
-          addItemsToUser={(refrigerators, points, userId) => this.props.addRefrigeratorsToUser(refrigerators, points, userId)}
+          inputs={false}
+          slogan={"Did you upgrade your refrigerator?"}
+          addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
           />
         // Drive Less
       case 4:
         return <SingleEntryForm
           card={this.props.card}
           resToClick={this.close}
+          inputs={true}
           completeCard={this.completeCard}
           slogan={"How many fewer miles did you drive this week?"}
           addItemsToUser={(miles, points, userId) => this.props.addMilesToUser(miles, points, userId)}
@@ -65,6 +69,7 @@ class MoreInfoModal extends React.Component {
             card={this.props.card}
             resToClick={this.close}
             completeCard={this.completeCard}
+            inputs={true}
             slogan={"On how many monitors did you enable sleep mode?"}
             addItemsToUser={(monitors, points, userId) => this.props.addMonitorsToUser(monitors, points, userId)}
             />
@@ -101,10 +106,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   completeCard: (card, currentUser, userCard, total_score, total_dollar_savings) => {dispatch(completeCard(card, currentUser, userCard, total_score, total_dollar_savings))},
+  addPointsToUser: (points, userId) => {dispatch(addPointsToUser(points, userId))},
   addWindowsToUser: (windows, points, userId) => {dispatch(addWindowsToUser(windows, points, userId))},
   addBulbToUser: (bulbs, points, userId) => {dispatch(addBulbToUser(bulbs, points, userId))},
-  addRefrigeratorsToUser: (bulbs, points, userId) => {dispatch(addRefrigeratorsToUser(bulbs, points, userId))},
-  addMilesToUser: (bulbs, points, userId) => {dispatch(addRefrigeratorsToUser(bulbs, points, userId))},
+  addMilesToUser: (miles, points, userId) => {dispatch(addMilesToUser(miles, points, userId))},
   addMonitorsToUser: (monitors, points, userId) => {dispatch(addMonitorsToUser(monitors, points, userId))}
 })
 

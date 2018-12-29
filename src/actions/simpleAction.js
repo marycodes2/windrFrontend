@@ -220,7 +220,7 @@ function addWindowsToUser(windows, points, userId) {
   }
 }
 
-function addRefrigeratorsToUser(refrigerators, points, userId) {
+function addPointsToUser(points, userId) {
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
     fetch(`http://localhost:3000/api/v1/users/${userId}`, {
@@ -230,7 +230,6 @@ function addRefrigeratorsToUser(refrigerators, points, userId) {
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        upgraded_refrigerators: refrigerators,
         score: oldPoints + points
       })
     })
@@ -277,4 +276,4 @@ function addMonitorsToUser(monitors, points, userId) {
   }
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addRefrigeratorsToUser, addMilesToUser, addMonitorsToUser}
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addPointsToUser, addMilesToUser, addMonitorsToUser}
