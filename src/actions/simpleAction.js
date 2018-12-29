@@ -258,6 +258,7 @@ function addMilesToUser(miles, points, userId) {
 }
 
 function addMonitorsToUser(monitors, points, userId) {
+  console.log("in addMonitorsToUser in Simple Action")
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
     fetch(`http://localhost:3000/api/v1/users/${userId}`, {
@@ -276,4 +277,44 @@ function addMonitorsToUser(monitors, points, userId) {
   }
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addPointsToUser, addMilesToUser, addMonitorsToUser}
+function addDegreesDecreasedToUser(degrees, points, userId) {
+  console.log("in addDegreesDecreasedToUser in Simple Action")
+  return (dispatch, getState) => {
+    let oldPoints = getState().reducer.currentUser.score
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        degrees_decreased_winter: degrees,
+        score: oldPoints + points
+      })
+    })
+    .then(res => res.json())
+    .then(userData => dispatch(addPoints(userData)))
+  }
+}
+
+function addDegreesIncreasedToUser(degrees, points, userId) {
+  console.log("in addDegreesIncreasedToUser in Simple Action")
+  return (dispatch, getState) => {
+    let oldPoints = getState().reducer.currentUser.score
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        degrees_increased_summer: degrees,
+        score: oldPoints + points
+      })
+    })
+    .then(res => res.json())
+    .then(userData => dispatch(addPoints(userData)))
+  }
+}
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addPointsToUser, addMilesToUser, addMonitorsToUser, addDegreesIncreasedToUser, addDegreesDecreasedToUser}

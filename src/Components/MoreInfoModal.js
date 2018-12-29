@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal } from 'semantic-ui-react'
-import { completeCard, addWindowsToUser, addBulbToUser, addPointsToUser, addMilesToUser, addMonitorsToUser } from '../actions/simpleAction'
+import { completeCard, addWindowsToUser, addBulbToUser, addPointsToUser, addMilesToUser, addMonitorsToUser, addDegreesDecreasedToUser, addDegreesIncreasedToUser } from '../actions/simpleAction'
 import { connect } from 'react-redux'
 import SingleEntryForm from '../CardModalForms/SingleEntryForm'
 
@@ -38,7 +38,7 @@ class MoreInfoModal extends React.Component {
         return <SingleEntryForm
           card={this.props.card}
           resToClick={this.close}
-          completeCard={this.completeCard}
+          completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
           inputs={true}
           slogan={"How many windows did you upgrade?"}
           addItemsToUser={(windows, points, userId) => this.props.addWindowsToUser(windows, points, userId)}
@@ -48,7 +48,7 @@ class MoreInfoModal extends React.Component {
         return <SingleEntryForm
           card={this.props.card}
           resToClick={this.close}
-          completeCard={this.completeCard}
+          completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
           inputs={false}
           slogan={"Did you upgrade your refrigerator?"}
           addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
@@ -59,8 +59,8 @@ class MoreInfoModal extends React.Component {
           card={this.props.card}
           resToClick={this.close}
           inputs={true}
-          completeCard={this.completeCard}
-          slogan={"How many fewer miles did you drive this week?"}
+          completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+          slogan={"How many fewer miles did you drive this week? Note: the below savings represent the amount of money saved if you sustained this reduction for the entire year!"}
           addItemsToUser={(miles, points, userId) => this.props.addMilesToUser(miles, points, userId)}
           />
         // Monitors
@@ -68,13 +68,103 @@ class MoreInfoModal extends React.Component {
           return <SingleEntryForm
             card={this.props.card}
             resToClick={this.close}
-            completeCard={this.completeCard}
+            completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
             inputs={true}
             slogan={"On how many monitors did you enable sleep mode?"}
             addItemsToUser={(monitors, points, userId) => this.props.addMonitorsToUser(monitors, points, userId)}
             />
-  }
-}
+          //Trash
+        case 6:
+          return <SingleEntryForm
+            card={this.props.card}
+            resToClick={this.close}
+            completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+            inputs={false}
+            slogan={"Did you ...trash?"}
+            addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+            />
+          // Winter Heat
+        case 7:
+          return <SingleEntryForm
+            card={this.props.card}
+            resToClick={this.close}
+            completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+            slogan={"How many degrees did you decrease your heat?"}
+            inputs={true}
+            addItemsToUser={(degrees, points, userId) => this.props.addDegreesDecreasedToUser(degrees, points, userId)}
+            />
+          // Clean Power
+        case 8:
+          return <SingleEntryForm
+            card={this.props.card}
+            resToClick={this.close}
+            completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+            inputs={false}
+            slogan={"Did you purchase clean power?"}
+            addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+            />
+          // Cold Water Wash
+        case 9:
+          return <SingleEntryForm
+            card={this.props.card}
+            resToClick={this.close}
+            completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+            inputs={false}
+            slogan={"Did you wash your clothes in cold water?"}
+            addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+            />
+          // Programmable Thermostat
+        case 10:
+          return <SingleEntryForm
+            card={this.props.card}
+            resToClick={this.close}
+            inputs={false}
+            completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+            slogan={"Did you purchase a programmable thermostat?"}
+            addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+            />
+          // Air Leaks
+          case 11:
+            return <SingleEntryForm
+              card={this.props.card}
+              resToClick={this.close}
+              completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+              inputs={false}
+              slogan={"Did you fix air leaks?"}
+              addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+              />
+            //Summer AC
+            case 12:
+              return <SingleEntryForm
+                card={this.props.card}
+                resToClick={this.close}
+                completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+                slogan={"How many degrees did you increase your heat?"}
+                inputs={true}
+                addItemsToUser={(degrees, points, userId) => this.props.addDegreesIncreasedToUser(degrees, points, userId)}
+                />
+              //Recycle
+            case 13:
+              return <SingleEntryForm
+                card={this.props.card}
+                resToClick={this.close}
+                completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+                inputs={false}
+                slogan={"Did you recycle?"}
+                addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+                />
+            //Water Heater Temperature
+            case 14:
+              return <SingleEntryForm
+                card={this.props.card}
+                resToClick={this.close}
+                completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+                inputs={false}
+                slogan={"Did you decrease the temperature on your water heater?"}
+                addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+                />
+            }
+          }
 
   render() {
     return(
@@ -110,8 +200,9 @@ const mapDispatchToProps = dispatch => ({
   addWindowsToUser: (windows, points, userId) => {dispatch(addWindowsToUser(windows, points, userId))},
   addBulbToUser: (bulbs, points, userId) => {dispatch(addBulbToUser(bulbs, points, userId))},
   addMilesToUser: (miles, points, userId) => {dispatch(addMilesToUser(miles, points, userId))},
-  addMonitorsToUser: (monitors, points, userId) => {dispatch(addMonitorsToUser(monitors, points, userId))}
+  addMonitorsToUser: (monitors, points, userId) => {dispatch(addMonitorsToUser(monitors, points, userId))},
+  addDegreesDecreasedToUser: (degrees, points, userId) => {dispatch(addDegreesDecreasedToUser(degrees, points, userId))},
+  addDegreesIncreasedToUser: (degrees, points, userId) => {dispatch(addDegreesIncreasedToUser(degrees, points, userId))}
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoreInfoModal)
