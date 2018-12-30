@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
 import { addCardToMyCards, addCardToUserCards, settingUser } from '../actions/simpleAction'
-import { Loader } from 'semantic-ui-react'
+import { Loader, Button } from 'semantic-ui-react'
 
 
 class SwipeContainer extends React.Component {
@@ -57,12 +57,20 @@ class SwipeContainer extends React.Component {
       </div>
     }
     return(
+      <React.Fragment>
       <div
         id="swipe"
         className="ui one column grid cards">
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
-        <React.Fragment> <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/> </React.Fragment>)}
+        <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/>)}
       </div>
+      <div
+        id="likeAndDislikeButtons">
+        <Button circular size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
+        <Button circular size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
+      </div>
+
+      </React.Fragment>
     )
   }
 }

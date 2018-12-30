@@ -2,10 +2,9 @@ import React from 'react'
 import DashboardCard from '../Components/DashboardCard'
 import { connect } from 'react-redux'
 import { Grid, Card } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
 import GetToSwiping from '../Components/GetToSwiping'
 import { getUsers } from '../actions/simpleAction'
-import { List, Image, Header, Icon, Segment } from 'semantic-ui-react'
+import { List, Image, Header } from 'semantic-ui-react'
 import CalculateDollarsSaved from '../Components/CalculateDollarsSaved'
 
 class DashboardContainer extends React.Component {

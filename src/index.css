@@ -68,16 +68,14 @@ code {
   display:flex;
   justify-content: center;
   align-items: center;
-  padding: 4.5rem;
+  padding: 4rem;
 
   position: relative;
   vertical-align: middle;
 }
 
+/* This is aligning my card */
 .ui.one.cards>.card {
-  /* display: inline-block;
-  vertical-align: middle;
-  margin-top: 1.5rem; */
   width: 40em;
 }
 
@@ -92,3 +90,17 @@ h2.ui.header .sub.header {
 .dashcard {
   margin: 2em;
 }
+
+#likeAndDislikeButtons {
+  padding-left: 33%;
+  padding-right: 33%;
+  padding-top: -50%;
+  margin-top: -3%;
+
+  /* padding-left: 2em;
+  padding-right: 2em; */
+}
+/* .ui green massive circular icon inverted button {
+  width: 40em;
+  align-items: center;
+} */

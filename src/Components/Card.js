@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Icon } from 'semantic-ui-react'
 import interact from 'interactjs'
+import TWEEN from '@tweenjs/tween.js'
 
 export default class WindrCard extends React.Component {
 
@@ -32,8 +33,10 @@ export default class WindrCard extends React.Component {
 
   dragMoveListenerEnd(event) {
     let positionX = event.pageX;
-    let leftBound = -50
-    let rightBound = window.innerWidth + 50
+    let innerWidthRatio = window.innerWidth / 4
+    let leftBound = innerWidthRatio
+    let rightBound = window.innerWidth - innerWidthRatio
+
 
     if (positionX > rightBound) {
       this.props.respondToSwipe(this.props.card, "right")
@@ -41,6 +44,8 @@ export default class WindrCard extends React.Component {
       this.props.respondToSwipe(this.props.card, "left")
     }
     else {
+      console.log(positionX, leftBound, rightBound, this)
+      this.setState({endingPosition: positionX})
 
       // target.style.webkitTransform =
       // // target.style.transform =
