@@ -32,7 +32,7 @@ class Header extends React.Component {
         </h2>
       </a>
       <Link className="item ui header" to='/'>Swipe</Link>
-      <NavLink className="item ui header" to='/dashboard'>Dashboard</NavLink>
+      <Link className="item ui header" to='/dashboard'>Dashboard</Link>
       {this.showLogoutButton()}
     </div>
   )

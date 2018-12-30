@@ -23,7 +23,8 @@ class Login extends React.Component {
 
   render() {
     return(
-      <div>
+      <div
+        id='login'>
         <Header as='h2'>
           <Icon name='settings' />
           <Header.Content>
@@ -34,15 +35,15 @@ class Login extends React.Component {
         </Header>
         <br></br>
       <Form onSubmit={this.handleSubmit}>
-        <Form.Group widths={2}>
+        <Form.Group>
 
-          <Form.Input required placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
-          <Form.Input required type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
-
+          <Form.Input width={6} required placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
+        </Form.Group>
+        <Form.Group>
+          <Form.Input width={6} required type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
+        </Form.Group>
       <Button type='submit'>Login</Button>
-      </Form.Group>
       </Form>
-      <br></br>
       <h1>-OR-</h1>
     <Button as={Link} to='/signup'>Create an Account</Button>
     </div>
