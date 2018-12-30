@@ -6,15 +6,15 @@ function fetchedMyCards(cardData){
   return {type: "FETCH_MY_CARDS", cardData}
 }
 
-let baseUrl = 'https://sleepy-ravine-75459.herokuapp.com/api/v1/'
+let baseUrl = 'https://windrbackend.herokuapp.com/api/v1/'
 
 function fetchCards(data) {
   if (data.user) {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/cards')
+    fetch(`${baseUrl}/cards`)
     .then(res => res.json())
     .then(data => dispatch(fetchedAllCards(data)))
-    .then(fetch(`http://localhost:3000/api/v1/users/${data.user.id}`)
+    .then(fetch(`${baseUrl}/users/${data.user.id}`)
     .then(result => result.json())
     .then(cardData => dispatch(fetchedMyCards(cardData))))
   }
@@ -27,7 +27,7 @@ function completedCard(data) {
 
 function completeCard(card, currentUser, userCard, total_score, total_dollar_savings) {
   return dispatch => {
-    fetch(`http://localhost:3000/api/v1/user_cards/${userCard[0].id}`, {
+    fetch(`${baseUrl}/user_cards/${userCard[0].id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function addedCardToUserCards(addedCard) {
 function addCardToUserCards(card, liked, userCard) {
   // console.log("CARD IS", card)
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/user_cards', {
+    fetch(`${baseUrl}/user_cards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ function addCardToMyCards(card) {
 
 function createAccount(formData) {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch(`${baseUrl}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ function createAccount(formData) {
 function logIn(formData) {
   // console.log("hit the action", formData)
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/login', {
+    fetch(`${baseUrl}/login`, {
       method: "POST",
       headers: {
         "Content-type" : "application/json",
@@ -142,7 +142,7 @@ function loggedIn(user) {
 
 function settingUser(token) {
   return dispatch => {
-  fetch('http://localhost:3000/api/v1/profile', {
+  fetch(`${baseUrl}/profile`, {
     method: "GET",
     headers: {
       'Authentication' : `Bearer ${token}`
@@ -169,7 +169,7 @@ function addBulbToUser(bulbs, points, userId) {
   return (dispatch, getState) => {
     // console.log("STATE:", getState().reducer.currentUser.score)
     let oldPoints = getState().reducer.currentUser.score
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -191,7 +191,7 @@ function addPoints(userData) {
 
 function getUsers() {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/users')
+    fetch(`${baseUrl}/users`)
     .then(res => res.json())
     .then(data => dispatch(createUsersHash(data)))
   }
@@ -207,7 +207,7 @@ function createUsersHash(data) {
 function addWindowsToUser(windows, points, userId) {
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -226,7 +226,7 @@ function addWindowsToUser(windows, points, userId) {
 function addPointsToUser(points, userId) {
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -244,7 +244,7 @@ function addPointsToUser(points, userId) {
 function addMilesToUser(miles, points, userId) {
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -264,7 +264,7 @@ function addMonitorsToUser(monitors, points, userId) {
   console.log("in addMonitorsToUser in Simple Action")
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -284,7 +284,7 @@ function addDegreesDecreasedToUser(degrees, points, userId) {
   console.log("in addDegreesDecreasedToUser in Simple Action")
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -303,7 +303,7 @@ function addDegreesDecreasedToUser(degrees, points, userId) {
 function addDegreesIncreasedToUser(degrees, points, userId) {
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -321,7 +321,7 @@ function addDegreesIncreasedToUser(degrees, points, userId) {
 
 function userNoLongerFirstTime(userId) {
   return (dispatch) => {
-    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
