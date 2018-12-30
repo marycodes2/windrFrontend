@@ -6,6 +6,8 @@ function fetchedMyCards(cardData){
   return {type: "FETCH_MY_CARDS", cardData}
 }
 
+BASE_URL = 'https://sleepy-ravine-75459.herokuapp.com/api/v1/'
+
 function fetchCards(data) {
   if (data.user) {
   return dispatch => {

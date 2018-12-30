@@ -68,7 +68,7 @@ class SwipeContainer extends React.Component {
     }
     return(
       <React.Fragment>
-      {(this.props.currentUser.first_time_user) ? <Header as='h3' textAlign='center'>Welcome to Windr! <br/> Get started by swiping <a id="right">right</a> on cards that pique your interest and <a id='left'>left</a> on cards that do not.</Header> : null}
+      {(this.props.currentUser.first_time_user) ? <Header as='h3' id='getStarted' textAlign='center'>Welcome to Windr! <br/> Swipe <a id="right">right</a> on cards that pique your interest and <a id='left'>left</a> on cards that do not.</Header> : null}
       <div
         id="swipe"
         className="ui one column grid cards">

@@ -2,6 +2,10 @@
   "name": "windrfrontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.5.0",
+    "node": "6.11.2"
+  },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
     "body-parser": "^1.18.3",
