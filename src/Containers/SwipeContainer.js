@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { addCardToMyCards, addCardToUserCards, settingUser } from '../actions/simpleAction'
-import { Loader, Button } from 'semantic-ui-react'
+import { addCardToMyCards, addCardToUserCards, settingUser, userNoLongerFirstTime } from '../actions/simpleAction'
+import { Loader, Button, Header } from 'semantic-ui-react'
 
 
 class SwipeContainer extends React.Component {
@@ -34,11 +34,21 @@ class SwipeContainer extends React.Component {
     let currentUser = this.props.currentUser
     this.addCard(returnCard)
     if (position === "left") {
+      if (this.props.currentUser.first_time_user) {
+        this.userNowKnowsApp()
+      }
       this.props.addCardToUserCards(returnCard, false, currentUser)
     }
     else if (position === "right") {
+      if (this.props.currentUser.first_time_user) {
+        this.userNowKnowsApp()
+      }
       this.props.addCardToUserCards(returnCard, true, currentUser)
     }
+  }
+
+  userNowKnowsApp = () => {
+    this.props.userNoLongerFirstTime(this.props.currentUser.id)
   }
 
   render() {
@@ -58,6 +68,7 @@ class SwipeContainer extends React.Component {
     }
     return(
       <React.Fragment>
+      {(this.props.currentUser.first_time_user) ? <Header as='h3' textAlign='center'>Welcome to Windr! <br/> Get started by swiping <a id="right">right</a> on cards that pique your interest and <a id='left'>left</a> on cards that do not.</Header> : null}
       <div
         id="swipe"
         className="ui one column grid cards">
@@ -66,8 +77,8 @@ class SwipeContainer extends React.Component {
       </div>
       <div
         id="likeAndDislikeButtons">
-        <Button circular size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
-        <Button circular size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
+        <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
+        <Button circular raised="true" size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
       </div>
 
       </React.Fragment>
@@ -89,7 +100,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addCardToMyCards: (card) => {dispatch(addCardToMyCards(card))},
     addCardToUserCards: (card, liked, currentUser) => {dispatch(addCardToUserCards(card, liked, currentUser))},
-    settingUser: (token) => {dispatch(settingUser(token))}
+    settingUser: (token) => {dispatch(settingUser(token))},
+    userNoLongerFirstTime: (id) => {dispatch(userNoLongerFirstTime(id))}
   }
 }
 

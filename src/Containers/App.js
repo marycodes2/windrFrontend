@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import SignUp from '../Components/SignUp'
 import Login from '../Components/Login'
 import { settingUser, fetchCards, getUsers } from '../actions/simpleAction'
-import { Loader } from 'semantic-ui-react'
 
 
 class App extends Component {
@@ -34,7 +33,6 @@ class App extends Component {
 
         <Route exact path='/' render={() => <Redirect to="/profile"/> } />
 
-        // Should be SwipeContainer, changing to DataForm for testing
         <Route exact path='/profile' render={() => this.props.currentUser ? <SwipeContainer/> : <Redirect to='/login'/>}/>
 
         <Route exact path='/login' render={() => this.props.currentUser ? <Redirect to='/profile'/> : <Login />}/>

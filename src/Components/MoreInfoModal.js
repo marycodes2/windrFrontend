@@ -163,6 +163,8 @@ class MoreInfoModal extends React.Component {
                 slogan={"Did you decrease the temperature on your water heater?"}
                 addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
                 />
+            default:
+              return "Something went wrong"
             }
           }
 

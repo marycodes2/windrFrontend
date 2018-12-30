@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Icon } from 'semantic-ui-react'
 import { completeCard } from '../actions/simpleAction'
 import { connect } from 'react-redux'
-import { Image, Grid } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 import MoreInfoModal from './MoreInfoModal'
 import DetermineNumStars from '../CardModalForms/DetermineNumStars'
 
@@ -16,21 +16,19 @@ const DashboardCard = (props, completed) => {
 
   const determineIfComplete = () => {
     if (!props.completed) {
-      return (<MoreInfoModal card={props.card}/>)
+      return (<MoreInfoModal key={props.card.id} card={props.card}/>)
     }
     else {
       return (<React.Fragment>
-      <a>
         <Icon name='dollar sign' />
         {determineUserCard()[0].total_dollar_savings} Saved per Year
         <br/>
         <Icon name='plus square outline'/>
         {determineUserCard()[0].total_windr_score} Windr Points
         <br/>
-        Upfront Cost: <DetermineNumStars icon={"dollar"} measurement={props.card.upfront_cost}/>
+        Upfront Cost: <DetermineNumStars key={`${props.card.id}-cost`}icon={"dollar"} measurement={props.card.upfront_cost}/>
         <br/>
-        Envira-Stars:  <DetermineNumStars icon={"envira"} measurement={props.card.stars}/>
-      </a>
+        Envira-Stars:  <DetermineNumStars key={`${props.card.id}-envira`} icon={"envira"} measurement={props.card.stars}/>
     </React.Fragment>)
     }
   }
@@ -43,7 +41,7 @@ const DashboardCard = (props, completed) => {
         <Image floated='right' size='mini' src={require(`../images/${props.card.image}.jpg`)}/>
         <Card.Header>{props.card.name}</Card.Header>
       </Card.Content>
-      <Card.Content extra>
+      <Card.Content>
         {determineIfComplete()}
       </Card.Content>
     </Card>

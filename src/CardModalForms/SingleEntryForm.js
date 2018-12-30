@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Header, Icon, Image, Button } from 'semantic-ui-react'
+import { Form, Header, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import CreateIcons from './CreateIcons'
 
@@ -10,14 +10,12 @@ class SingleEntryForm extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log("In handle submit, props are:", this.props)
     let items = this.state.items
     let total_dollar_savings = this.state.items * this.props.card.dollar_savings
     let points = this.props.card.score * items
     let userId = this.props.currentUser.id
     this.props.resToClick()
     this.props.completeCard(points, total_dollar_savings)
-    console.log("at line above addItemsToUser, this.props.inputs:", this.props.inputs)
     if (this.props.inputs) {
       this.props.addItemsToUser(items, points, userId)
     }

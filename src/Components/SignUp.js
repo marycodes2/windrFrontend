@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Header, Icon, Image, Button } from 'semantic-ui-react'
+import { Form,  Header, Icon, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { createAccount } from '../actions/simpleAction'
 import { Link } from 'react-router-dom'
@@ -17,30 +17,40 @@ class SignUp extends React.Component {
   avatarOptions = () => {
     let avatarOptions = [
   {
-    text: 'Tyra Banks',
-    value: 'Tyra',
-    image: { avatar: true, src: require('../images/Tyra Banks.jpg') },
+    text: 'Anti-Oil',
+    value: 'Anti-Oil',
+    image: { avatar: true, src: require('../images/avatars/Anti-Oil.jpg') },
   },
   {
-    text: 'Beyonce',
-    value: 'Beyonce',
-    image: { avatar: true, src: require('../images/Beyonce.jpg') },
+    text: 'Heart',
+    value: 'Heart',
+    image: { avatar: true, src: require('../images/avatars/Heart.jpg') },
   },
   {
-    text: 'Ariana Grande',
-    value: 'Ariana',
-    image: { avatar: true, src: require('../images/Ariana Grande.jpg') },
+    text: 'Mountains',
+    value: 'Mountains',
+    image: { avatar: true, src: require('../images/avatars/Mountains.jpg') },
   },
   {
-    text: 'Hillary Clinton',
-    value: 'Hillary',
-    image: { avatar: true, src: require('../images/Hillary Clinton.jpg') },
+    text: 'Solar',
+    value: 'Solar',
+    image: { avatar: true, src: require('../images/avatars/Solar.jpg') },
   },
   {
-    text: 'Juan Dixon',
-    value: 'Juan',
-    image: { avatar: true, src: require('../images/Juan Dixon.jpg') },
-  } ]
+    text: 'Sun',
+    value: 'Sun',
+    image: { avatar: true, src: require('../images/avatars/Sun.jpg') },
+  },
+  {
+    text: 'Tree',
+    value: 'Tree',
+    image: { avatar: true, src: require('../images/avatars/Tree.jpg') },
+  },
+  {
+    text: 'Waterfall',
+    value: 'Waterfall',
+    image: { avatar: true, src: require('../images/avatars/Waterfall.jpg') },
+  }]
 
   return avatarOptions
 
@@ -69,15 +79,15 @@ class SignUp extends React.Component {
           </Header.Content>
         </Header>
         <br></br>
-      <Form onSubmit={this.handleSubmit}>
+      <Form>
 
           <Form.Input required width={6} placeholder="Name" label='Name' name="name" onChange={(event) => {this.setState({name: event.target.value})}}/>
           <Form.Input type="number" width={6} required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
           <Form.Input required width={6} placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
           <Form.Input required width={6} type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
-          <Form.Dropdown placeholder='Tyra' width={6} label='Avatar' fluid selection options={this.avatarOptions()} onChange={(event) => {this.setState({avatar: event.target.innerText})}} />
+          <Form.Dropdown placeholder='Heart' width={6} label='Avatar' fluid selection options={this.avatarOptions()} onChange={(event) => {this.setState({avatar: event.target.innerText})}} />
 
-      <Button type='submit'>Submit</Button>
+          <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
       </Form>
       <br></br>
       <br></br>

@@ -48,13 +48,13 @@ class DashboardContainer extends React.Component {
     let user = this.props.allUsers.filter(user => (
       user.username === username
     ))
-    return <Image avatar src={require(`../images/${user[0].avatar}.jpg`)} />
+    return <Image avatar src={require(`../images/avatars/${user[0].avatar}.jpg`)} />
   }
 
   returnCurrentUser = () => {
     if (this.props.currentUser) {
       return <div >
-        <Image src={require(`../images/${this.props.currentUser.avatar}.jpg`)} avatar centered />
+        <Image src={require(`../images/avatars/${this.props.currentUser.avatar}.jpg`)} avatar centered />
         <span>
           <i><Header as='h1'>Hi {this.props.currentUser.name}!</Header></i>
         </span>
@@ -75,22 +75,22 @@ class DashboardContainer extends React.Component {
       <Grid padded columns={2}>
 
         <Grid.Row>
-          <Grid.Column padded>
+          <Grid.Column padded="true">
             <Header as='h3' dividing>My Score</Header>
             <Header as='h1'>{this.props.currentUser.score} Points</Header>
             <Header as='h1'><CalculateDollarsSaved /> Saved</Header>
 
           </Grid.Column>
 
-          <Grid.Column padded>
+          <Grid.Column padded="true">
             <Header as='h3' dividing>LeaderBoard</Header>
-              <List ordered>{this.determineLeaderBoard().map(leader => <List.Item as='a'> {this.determineAvatar(leader)}  {leader}</List.Item>)}</List>
+              <List ordered>{this.determineLeaderBoard().map(leader => <List.Item key={leader.id} as='a'> {this.determineAvatar(leader)}  {leader}</List.Item>)}</List>
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row>
-          <Grid.Column padded>
-            <Header as='h3' dividing>Queue</Header>
+          <Grid.Column padded="true">
+            <Header as='h3' dividing>Queue: <a id="queue">Cards that piqued your interest. Select <i>'More Info'</i> to complete these actions.</a></Header>
               {(this.determineQueueCards().length < 1) ? <h4><i>No cards in your queue! <br></br><br></br> <GetToSwiping /></i></h4> : null}
               <Card.Group itemsPerRow={1}>
                   {this.determineQueueCards().map(card =>
@@ -101,8 +101,8 @@ class DashboardContainer extends React.Component {
                     /> )}
               </Card.Group>
           </Grid.Column>
-          <Grid.Column padded>
-            <Header as='h3' dividing>Completed</Header>
+          <Grid.Column padded="true">
+            <Header as='h3' dividing>Completed: <a id="queue">Actions you have completed. Great job!</a></Header>
             {(this.determineCompletedCards().length < 1) ? <h4><i>You have not completed any cards!</i></h4> : null}
             <Card.Group itemsPerRow={1}>
               {this.determineCompletedCards().map(card =>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card, Icon } from 'semantic-ui-react'
 import interact from 'interactjs'
-import TWEEN from '@tweenjs/tween.js'
 
 export default class WindrCard extends React.Component {
 
@@ -44,7 +43,6 @@ export default class WindrCard extends React.Component {
       this.props.respondToSwipe(this.props.card, "left")
     }
     else {
-      console.log(positionX, leftBound, rightBound, this)
       this.setState({endingPosition: positionX})
 
       // target.style.webkitTransform =
@@ -64,10 +62,10 @@ export default class WindrCard extends React.Component {
       description={this.props.card.description}
       extra={
       <React.Fragment>
-      <a>
+      <div>
         <Icon name='plus square outline'/>
         {this.props.card.score} points per action
-      </a>
+      </div>
       </React.Fragment>
       }
 

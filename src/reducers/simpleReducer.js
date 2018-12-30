@@ -11,7 +11,7 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
   case "ADD_CARD_TO_USER_CARDS":
     return {...state, userCards: [...state.userCards, action.addedCard]}
   case 'COMPLETE_CARD':
-    console.log("Data in COMPLETE_CARD", action.data)
+    // console.log("Data in COMPLETE_CARD", action.data)
       let newUserCards = state.userCards.map(card => {
         if (card.id === action.data.id){
           return {
@@ -27,7 +27,6 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
       return {...state, userCards: newUserCards}
   case 'SET_TOKEN':
     localStorage.setItem('token', action.user.jwt)
-
     // commented the below line out, but might end up needing it?
     // return {currentUser: action.userDataHash.user}
   case 'SET_USER':
@@ -40,7 +39,7 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
     // console.log(action.data[1])
     return {...state, usersHash: action.data[0], allUsers: action.data[1]}
   case 'ADD_POINTS':
-    console.log("Data in ADD_POINTS", action.userData)
+    // console.log("Data in ADD_POINTS", action.userData)
     let newHash = state.usersHash[action.userData.username] = action.userData.score
     return {...state, currentUser: action.userData}
   default:

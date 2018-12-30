@@ -9,7 +9,7 @@ const DetermineNumStars = (props) => {
     return "Free"
   }
   while (i < props.measurement) {
-    returnValue.push(<Icon color="green" bold fitted name={props.icon} />)
+    returnValue.push(<Icon color="green" fitted name={props.icon} />)
     i++
   }
   let j = returnValue.length

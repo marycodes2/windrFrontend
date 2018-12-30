@@ -90,7 +90,8 @@ function createAccount(formData) {
         zipcode: formData.zipcode,
         access_type: 'user',
         avatar: formData.avatar,
-        score: 0
+        score: 0,
+        first_time_user: true
       }
     })
   })
@@ -298,7 +299,6 @@ function addDegreesDecreasedToUser(degrees, points, userId) {
 }
 
 function addDegreesIncreasedToUser(degrees, points, userId) {
-  console.log("in addDegreesIncreasedToUser in Simple Action")
   return (dispatch, getState) => {
     let oldPoints = getState().reducer.currentUser.score
     fetch(`http://localhost:3000/api/v1/users/${userId}`, {
@@ -317,4 +317,21 @@ function addDegreesIncreasedToUser(degrees, points, userId) {
   }
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addPointsToUser, addMilesToUser, addMonitorsToUser, addDegreesIncreasedToUser, addDegreesDecreasedToUser}
+function userNoLongerFirstTime(userId) {
+  return (dispatch) => {
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        first_time_user: false
+      })
+    })
+    .then(res => res.json())
+    .then(console.log)
+  }
+}
+
+export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addPointsToUser, addMilesToUser, addMonitorsToUser, addDegreesIncreasedToUser, addDegreesDecreasedToUser, userNoLongerFirstTime}
