@@ -50,7 +50,7 @@ class MoreInfoModal extends React.Component {
           resToClick={this.close}
           completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
           inputs={false}
-          slogan={"Did you upgrade your refrigerator?"}
+          slogan={"Use this calculator to determine how much you can save by flipping your fridge: <a href='https://www.energystar.gov/index.cfm?fuseaction=refrig.calculator'></a> Did you upgrade your refrigerator?"}
           addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
           />
         // Drive Less

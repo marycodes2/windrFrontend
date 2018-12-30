@@ -46,6 +46,7 @@ class Login extends React.Component {
       </Form>
       <Button type='submit' onClick={this.handleSubmit}>Login</Button>
       <h1>-OR-</h1>
+      <br/>
     <Button as={Link} to='/signup'>Create an Account</Button>
     </div>
     )

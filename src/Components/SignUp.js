@@ -90,6 +90,7 @@ class SignUp extends React.Component {
           <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
       </Form>
       <br></br>
+      <h1>-OR-</h1>
       <br></br>
       <Button as={Link} to='/login'>Log in to your Account</Button>
     </div>

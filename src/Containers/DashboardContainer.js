@@ -22,6 +22,16 @@ class DashboardContainer extends React.Component {
     return this.props.myCards.filter(card => completedUserCardIds.includes(card.id))
   }
 
+  getSum = (total, num) => {
+    return total + num
+  }
+
+  determinePotentialSavings = () => {
+    let sumList = this.determineQueueCards().map(card => card.dollar_savings)
+    let sum = sumList.reduce(this.getSum, 0)
+    return sum
+  }
+
   determineLeaderBoard = () => {
     if (this.props.usersHash) {
     let usersHash = this.props.usersHash
@@ -79,7 +89,7 @@ class DashboardContainer extends React.Component {
             <Header as='h3' dividing>My Score</Header>
             <Header as='h1'>{this.props.currentUser.score} Points</Header>
             <Header as='h1'><CalculateDollarsSaved /> Saved</Header>
-
+            <Header as='h1'>${this.determinePotentialSavings()} Potential Savings</Header>
           </Grid.Column>
 
           <Grid.Column padded="true">
