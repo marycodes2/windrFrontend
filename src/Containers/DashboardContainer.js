@@ -54,11 +54,15 @@ class DashboardContainer extends React.Component {
   }
 
   determineAvatar(leader) {
-    let username = leader.split(" ")[0]
-    let user = this.props.allUsers.filter(user => (
-      user.username === username
-    ))
-    return <Image avatar src={require(`../images/avatars/${user[0].avatar}.jpg`)} />
+    if (leader) {
+      let username = leader.split("-")[0].trim()
+      let user = this.props.allUsers.filter(user => (
+        user.username === username
+      ))
+      return <Image avatar src={require(`../images/avatars/${user[0].avatar}.jpg`)} /> }
+    else {
+      return <Image avatar src={require(`../images/avatars/Heart.jpg`)} />
+    }
   }
 
   returnCurrentUser = () => {
