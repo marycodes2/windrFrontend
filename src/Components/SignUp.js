@@ -11,7 +11,7 @@ class SignUp extends React.Component {
     username: "",
     password: "",
     zipcode: "",
-    avatar: "Tyra"
+    avatar: "Heart"
   }
 
   avatarOptions = () => {
@@ -85,7 +85,7 @@ class SignUp extends React.Component {
           <Form.Input type="number" width={6} required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
           <Form.Input required width={6} placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
           <Form.Input required width={6} type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
-          <Form.Dropdown placeholder='Heart' width={6} label='Avatar' fluid selection options={this.avatarOptions()} onChange={(event) => {this.setState({avatar: event.target.innerText})}} />
+          <Form.Dropdown required placeholder='Heart' width={6} label='Avatar' fluid selection options={this.avatarOptions()} onChange={(event) => {this.setState({avatar: event.target.innerText})}} />
 
           <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
       </Form>
