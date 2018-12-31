@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
 import { addCardToMyCards, addCardToUserCards, settingUser, userNoLongerFirstTime } from '../actions/simpleAction'
-import { Loader, Button, Header } from 'semantic-ui-react'
+import { Loader, Button, Header, Responsive } from 'semantic-ui-react'
 
 
 class SwipeContainer extends React.Component {
@@ -68,7 +68,10 @@ class SwipeContainer extends React.Component {
     }
     return(
       <React.Fragment>
-      {(this.props.currentUser.first_time_user) ? <Header as='h3' id='getStarted' textAlign='center'>Welcome to Windr! <br/> Swipe <a id="right">right</a> on cards that pique your interest and <a id='left'>left</a> on cards that do not.</Header> : null}
+        <Responsive
+           minWidth={500}>
+           {(this.props.currentUser.first_time_user) ? <React.Fragment><Header as='h3' id='getStarted' textAlign='center'>Welcome to Windr! <br/> Swipe <a id="right">right</a> on cards that pique your interest and <a id='left'>left</a> on cards that do not.</Header></React.Fragment> : null}
+        </Responsive>
       <div
         id="swipe"
         className="ui one column grid cards">

@@ -22,7 +22,7 @@ class Navbar extends React.Component {
   return(
   <React.Fragment>
   <Responsive
-     maxWidth={399}>
+     maxWidth={450}>
     <Menu
       className={'ui inverted grey menu navbar'}
       size='mini'
@@ -52,7 +52,7 @@ class Navbar extends React.Component {
 
 
   <Responsive
-     minWidth={400}>
+     minWidth={451}>
     <div
       className={`ui inverted grey menu navbar`}>
       <div className="item">
