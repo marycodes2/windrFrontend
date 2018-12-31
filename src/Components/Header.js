@@ -1,24 +1,58 @@
 import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Responsive, Menu, Header } from 'semantic-ui-react'
 import { logOut } from '../actions/simpleAction'
 
 
 
-class Header extends React.Component {
+class Navbar extends React.Component {
 
   showLogoutButton = () => {
     if (this.props.currentUser) {
-      return <NavLink
+      return <Link
         onClick={() => this.props.logOut()}
         className="item ui header"
         to='/login'
-        >Log Out</NavLink>
+        >Log Out</Link>
+
     }
   }
   render(){
   return(
+  <React.Fragment>
+  <Responsive
+     maxWidth={399}>
+    <Menu
+      className={'ui inverted grey menu navbar'}
+      size='mini'
+      fluid>
+      <div
+        id="mobileHeader">
+        <Header>
+          <Icon.Group size="large">
+            <Icon name="envira" />
+            <Icon corner="top right" name="heart" inverted/>
+          </Icon.Group>
+          <div className="content heading">Windr</div>
+          <div
+            className="sub header"
+            id="mobileText">
+            <i>Keeping the Lights Off</i></div>
+        </Header>
+      </div>
+        <Link className="item ui header" to='/'>Swipe</Link>
+
+        <Link className="item ui header" to='/dashboard'>Dashboard</Link>
+
+        {this.showLogoutButton()}
+
+    </Menu>
+  </Responsive>
+
+
+  <Responsive
+     minWidth={400}>
     <div
       className={`ui inverted grey menu navbar`}>
       <div className="item">
@@ -35,6 +69,8 @@ class Header extends React.Component {
       <Link className="item ui header" to='/dashboard'>Dashboard</Link>
       {this.showLogoutButton()}
     </div>
+  </Responsive>
+  </React.Fragment>
   )
   }
 }
@@ -51,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

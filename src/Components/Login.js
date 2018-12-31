@@ -28,6 +28,7 @@ class Login extends React.Component {
         <Header as='h2'>
           <Icon name='settings' />
           <Header.Content>
+            <br/>
             Welcome to Windr!
             <br></br>
             Login to Your Account to View Your Profile

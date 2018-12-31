@@ -73,6 +73,7 @@ class SignUp extends React.Component {
       <div
         id="signup">
         <Header as='h2'>
+          <br/>
           <Icon name='settings' />
           <Header.Content>
             Create Windr Account

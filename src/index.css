@@ -92,8 +92,8 @@ h2.ui.header .sub.header {
 }
 
 #likeAndDislikeButtons {
-  padding-left: 33%;
-  padding-right: 33%;
+  padding-left: 31%;
+  padding-right: 31%;
   padding-top: -50%;
   margin-top: -3%;
 
@@ -131,4 +131,12 @@ h2.ui.header .sub.header {
 #getStarted {
   margin-left: 15px;
   margin-right: 15px;
+}
+
+#mobileHeader {
+  padding-top: 6px;
+}
+
+#mobileText {
+  color: white;
 }
