@@ -81,8 +81,8 @@ function createAccount(formData) {
     fetch(`${baseUrl}/users`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     },
     body: JSON.stringify({
       user: {
