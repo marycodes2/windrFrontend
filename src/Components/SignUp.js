@@ -81,14 +81,17 @@ class SignUp extends React.Component {
         </Header>
         <br></br>
       <Form>
+        <Form.Group>
 
           <Form.Input required width={6} placeholder="Name" label='Name' name="name" onChange={(event) => {this.setState({name: event.target.value})}}/>
           <Form.Input type="number" width={6} required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
           <Form.Input required width={6} placeholder="Username" label='Username' name="username" onChange={(event) => {this.setState({username: event.target.value})}}/>
           <Form.Input required width={6} type="password" placeholder="Password" label='Password' name="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
           <Form.Dropdown required placeholder='Heart' width={6} label='Avatar' fluid selection options={this.avatarOptions()} onChange={(event) => {this.setState({avatar: event.target.innerText})}} />
+          </Form.Group>
 
           <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
+
       </Form>
       <br></br>
       <h1>-OR-</h1>
