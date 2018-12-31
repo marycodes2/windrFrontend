@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Grid, Card } from 'semantic-ui-react'
 import GetToSwiping from '../Components/GetToSwiping'
 import { getUsers } from '../actions/simpleAction'
-import { List, Image, Header } from 'semantic-ui-react'
+import { List, Image, Header, Loader } from 'semantic-ui-react'
 import CalculateDollarsSaved from '../Components/CalculateDollarsSaved'
 
 class DashboardContainer extends React.Component {
@@ -76,6 +76,15 @@ class DashboardContainer extends React.Component {
     }
   }
 
+  renderLeaderBoard = () => {
+    if (this.determineLeaderBoard().length === 0) {
+      return <Loader active inline='centered' />
+    }
+    else {
+      return <List ordered>{this.determineLeaderBoard().map(leader => <List.Item key={leader.id} as='a'> {this.determineAvatar(leader)}  {leader}</List.Item>)}</List>
+    }
+  }
+
   render(){
     // add 'celled' to Grid below if you want to separate the grids
     return(
@@ -98,7 +107,7 @@ class DashboardContainer extends React.Component {
 
           <Grid.Column padded="true">
             <Header as='h3' dividing>LeaderBoard</Header>
-              <List ordered>{this.determineLeaderBoard().map(leader => <List.Item key={leader.id} as='a'> {this.determineAvatar(leader)}  {leader}</List.Item>)}</List>
+            {this.renderLeaderBoard()}
           </Grid.Column>
         </Grid.Row>
 
