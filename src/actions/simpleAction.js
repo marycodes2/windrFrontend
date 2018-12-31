@@ -6,7 +6,7 @@ function fetchedMyCards(cardData){
   return {type: "FETCH_MY_CARDS", cardData}
 }
 
-let baseUrl = 'https://windrbackend.herokuapp.com/api/v1/'
+let baseUrl = 'https://windrbackend.herokuapp.com/api/v1'
 
 function fetchCards(data) {
   if (data.user) {
