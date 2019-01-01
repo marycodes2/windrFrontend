@@ -2,7 +2,8 @@ import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
 import { addCardToMyCards, addCardToUserCards, settingUser, userNoLongerFirstTime } from '../actions/simpleAction'
-import { Loader, Button, Header, Responsive } from 'semantic-ui-react'
+import { Loader, Button, Header, Responsive, List } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 
 class SwipeContainer extends React.Component {
@@ -63,7 +64,15 @@ class SwipeContainer extends React.Component {
       return <div
         id="swipe"
         className="ui one column grid cards">
-        No cards left to swipe!
+        <List>
+          <List.Item>No cards left to swipe </List.Item>
+          <List.Item> </List.Item>
+          <List.Item>
+            <Button color='pink' as={Link} to="/dashboard">
+              Visit Dashboard
+            </Button>
+          </List.Item>
+        </List>
       </div>
     }
     return(

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const GetToSwiping = () => {
   return (
-      <Button as={Link} to="/" primary>
+      <Button color='pink' as={Link} to="/">
         ~Get to Swiping~
       </Button>
   )

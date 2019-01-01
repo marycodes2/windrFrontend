@@ -113,7 +113,7 @@ class DashboardContainer extends React.Component {
 
         <Grid.Row>
           <Grid.Column padded="true">
-            <Header as='h3' dividing>Queue: <a id="queue">Cards that piqued your interest. Select <i>'More Info'</i> to complete these actions.</a></Header>
+            <Header as='h3' dividing>Queue: <a id="queue">Select <i>'More Info'</i> to complete your cards and <u>earn points.</u></a></Header>
               {(this.determineQueueCards().length < 1) ? <h4><i>No cards in your queue! <br></br><br></br> <GetToSwiping /></i></h4> : null}
               <Card.Group itemsPerRow={1}>
                   {this.determineQueueCards().map(card =>

@@ -32,7 +32,6 @@ class SingleEntryForm extends React.Component {
   render() {
     return(
       <div>
-      <Header as='h3'>{this.props.card.description}</Header>
       <Header as='h4'>{this.props.slogan}</Header>
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths={2}>
