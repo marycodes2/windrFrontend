@@ -1,12 +1,16 @@
 import React from 'react';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { addCardToMyCards, addCardToUserCards, settingUser, userNoLongerFirstTime } from '../actions/simpleAction'
-import { Loader, Button, Header, Responsive, List } from 'semantic-ui-react'
+import { addCardToMyCards, addCardToUserCards, settingUser, userNoLongerFirstTime, userNoLongerFirstTimeSwipe } from '../actions/simpleAction'
+import { Loader, Button, Header, Responsive, List, Modal, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 
 class SwipeContainer extends React.Component {
+  state = {
+    open: true,
+    visits: 0
+  }
 
   componentDidMount() {
     let token = localStorage.getItem('token')
@@ -36,13 +40,13 @@ class SwipeContainer extends React.Component {
     this.addCard(returnCard)
     if (position === "left") {
       if (this.props.currentUser.first_time_user) {
-        this.userNowKnowsApp()
+        this.userNowKnowsAppSwipe()
       }
       this.props.addCardToUserCards(returnCard, false, currentUser)
     }
     else if (position === "right") {
       if (this.props.currentUser.first_time_user) {
-        this.userNowKnowsApp()
+        this.userNowKnowsAppSwipe()
       }
       this.props.addCardToUserCards(returnCard, true, currentUser)
     }
@@ -50,6 +54,15 @@ class SwipeContainer extends React.Component {
 
   userNowKnowsApp = () => {
     this.props.userNoLongerFirstTime(this.props.currentUser.id)
+  }
+
+  userNowKnowsAppSwipe = () => {
+    this.props.userNoLongerFirstTimeSwipe(this.props.currentUser.id)
+  }
+
+  close = () => {
+    this.setState({ open: false })
+    this.userNowKnowsApp()
   }
 
   render() {
@@ -78,8 +91,23 @@ class SwipeContainer extends React.Component {
     return(
       <React.Fragment>
         <Responsive
-           minWidth={500}>
+           minWidth={451}>
            {(this.props.currentUser.first_time_user) ? <React.Fragment><Header as='h3' id='getStarted' textAlign='center'>Welcome to Windr! <br/> Swipe <a id="right">right</a> on cards that pique your interest and <a id='left'>left</a> on cards that do not.</Header></React.Fragment> : null}
+        </Responsive>
+        <Responsive
+           maxWidth={450}>
+           {this.props.currentUser.first_time_user ?
+            <Modal
+              open={this.state.open}>
+              <Modal.Content>
+                Welcome to Windr! Swipe right on cards that pique your interest and left on cards that do not.
+              </Modal.Content>
+              <Modal.Actions>
+                <Button color='green' onClick={this.close} inverted>
+                  <Icon name='checkmark' /> Got it
+                </Button>
+              </Modal.Actions>
+            </Modal> : null}
         </Responsive>
       <div
         id="swipe"
@@ -113,7 +141,8 @@ const mapDispatchToProps = (dispatch) => {
     addCardToMyCards: (card) => {dispatch(addCardToMyCards(card))},
     addCardToUserCards: (card, liked, currentUser) => {dispatch(addCardToUserCards(card, liked, currentUser))},
     settingUser: (token) => {dispatch(settingUser(token))},
-    userNoLongerFirstTime: (id) => {dispatch(userNoLongerFirstTime(id))}
+    userNoLongerFirstTime: (id) => {dispatch(userNoLongerFirstTime(id))},
+    userNoLongerFirstTimeSwipe: (id) => {dispatch(userNoLongerFirstTimeSwipe(id))}
   }
 }
 

@@ -332,8 +332,27 @@ function userNoLongerFirstTime(userId) {
       })
     })
     .then(res => res.json())
-    .then(console.log)
+    .then(data=> dispatch(setFirstTimeUser(data)))
   }
 }
 
-export { fetchedMyCards, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addPointsToUser, addMilesToUser, addMonitorsToUser, addDegreesIncreasedToUser, addDegreesDecreasedToUser, userNoLongerFirstTime}
+function userNoLongerFirstTimeSwipe(userId) {
+  return (dispatch) => {
+    fetch(`${baseUrl}/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        first_time_user: false
+      })
+    })
+  }
+}
+
+function setFirstTimeUser(user) {
+  return {type: "SET_FIRST_TIME_USER", user}
+}
+
+export { fetchedMyCards, userNoLongerFirstTimeSwipe, fetchedAllCards, fetchCards, addCardToMyCards, completeCard, addCardToUserCards, createAccount, logIn, settingUser, logOut, addBulbToUser, getUsers, addWindowsToUser, addPointsToUser, addMilesToUser, addMonitorsToUser, addDegreesIncreasedToUser, addDegreesDecreasedToUser, userNoLongerFirstTime}

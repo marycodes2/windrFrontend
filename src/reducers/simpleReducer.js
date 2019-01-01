@@ -32,6 +32,9 @@ export default (state = {allCards: [], myCards: [], userCards: [], currentUser: 
   case 'SET_USER':
     // console.log("ACTION =", action)
     return {...state, currentUser: action.user.user}
+  case "SET_FIRST_TIME_USER":
+    console.log(action.user)
+    return {...state, currentUser: action.user}
   case 'RESET_STATE':
     localStorage.removeItem('token')
     return {allCards: [], myCards: [], userCards: [], currentUser: null}
