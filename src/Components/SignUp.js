@@ -61,7 +61,6 @@ class SignUp extends React.Component {
     if (avatarValue.includes("Anti-Oil\nHeart\n")) {
       avatarValue = "Heart"
     }
-    alert(avatarValue)
     let formData = {
       name: this.state.name,
       zipcode: parseInt(this.state.zipcode),
