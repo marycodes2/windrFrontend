@@ -59,16 +59,25 @@ class DashboardContainer extends React.Component {
       let user = this.props.allUsers.filter(user => (
         user.username === username
       ))
-      return <Image avatar src={require(`../images/avatars/${user[0].avatar}.jpg`)} /> }
+      if (user[0].avatar) {
+        return <Image avatar src={require(`../images/avatars/${user[0].avatar}.jpg`)} /> }}
     else {
       return <Image avatar src={require(`../images/avatars/Heart.jpg`)} />
     }
   }
 
   returnCurrentUser = () => {
-    if (this.props.currentUser) {
+    if (this.props.currentUser.avatar) {
       return <div >
         <Image src={require(`../images/avatars/${this.props.currentUser.avatar}.jpg`)} avatar centered />
+        <span>
+          <i><Header as='h1'>Hi {this.props.currentUser.name}!</Header></i>
+        </span>
+      </div>
+    }
+    else {
+      return <div >
+        <Image src={require(`../images/avatars/Heart.jpg`)} avatar centered />
         <span>
           <i><Header as='h1'>Hi {this.props.currentUser.name}!</Header></i>
         </span>
