@@ -163,6 +163,26 @@ class MoreInfoModal extends React.Component {
                 slogan={"Did you decrease the temperature on your water heater?"}
                 addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
                 />
+              //Solar
+              case 15:
+                return <SingleEntryForm
+                  card={this.props.card}
+                  resToClick={this.close}
+                  completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+                  inputs={false}
+                  slogan={"Did you install solar panels?"}
+                  addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+                  />
+                //Peak
+                case 16:
+                  return <SingleEntryForm
+                    card={this.props.card}
+                    resToClick={this.close}
+                    completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
+                    inputs={false}
+                    slogan={"Did you not consume energy during peak horus?"}
+                    addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
+                    />
             default:
               return "Something went wrong"
             }
