@@ -57,16 +57,20 @@ class SignUp extends React.Component {
   }
 
   handleSubmit = () => {
+    let avatarValue = this.state.avatar
+    if (avatarValue.includes("Anti-Oil\nHeart\n")) {
+      avatarValue = "Heart"
+    }
+    alert(avatarValue)
     let formData = {
       name: this.state.name,
       zipcode: parseInt(this.state.zipcode),
       username: this.state.username,
       password: this.state.password,
-      avatar: this.state.avatar
+      avatar: avatarValue
     }
     this.props.createAccount(formData)
   }
-
 
   render() {
     return(
@@ -84,7 +88,7 @@ class SignUp extends React.Component {
         <Form.Group>
           <Form.Input required width={6} placeholder="Name" label='Name' name="name" onChange={(event) => {this.setState({name: event.target.value})}}/>
         </Form.Group>
-        
+
         <Form.Group>
           <Form.Input type="number" width={6} required placeholder="Zipcode" label='Zip Code' name="Zipcode" onChange={(event) => {this.setState({zipcode: event.target.value})}}/>
         </Form.Group>
