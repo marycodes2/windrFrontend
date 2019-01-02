@@ -115,7 +115,7 @@ class DashboardContainer extends React.Component {
           </Grid.Column>
 
           <Grid.Column padded="true">
-            <Header as='h3' dividing>LeaderBoard</Header>
+            <Header as='h3' dividing>Leaderboard</Header>
             {this.renderLeaderBoard()}
           </Grid.Column>
         </Grid.Row>
