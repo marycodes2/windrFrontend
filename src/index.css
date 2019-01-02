@@ -93,8 +93,18 @@ h2.ui.header .sub.header {
 }
 
 #likeAndDislikeButtons {
-  padding-left: 31%;
-  padding-right: 31%;
+  padding-left: 40%;
+  padding-right: 40%;
+  padding-top: -50%;
+  margin-top: -3%;
+
+  /* padding-left: 2em;
+  padding-right: 2em; */
+}
+
+#likeAndDislikeButtonsForMobile {
+  padding-left: 28%;
+  padding-right: 28%;
   padding-top: -50%;
   margin-top: -3%;
 
