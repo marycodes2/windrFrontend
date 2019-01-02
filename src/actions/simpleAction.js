@@ -154,6 +154,8 @@ function settingUser(token) {
     dispatch(fetchCards(data))
     dispatch(setUser(data))}
   })
+  .catch(err => {
+    debugger})
   }
 }
 
