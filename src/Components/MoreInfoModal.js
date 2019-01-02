@@ -29,7 +29,7 @@ class MoreInfoModal extends React.Component {
           card={this.props.card}
           resToClick={this.close}
           completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
-          slogan={"How many bulbs did you upgrade to LEDs?"}
+          slogan={<React.Fragment>Replacing light bulbs is an easy, inexpensive way to save $4/year/bulb! <br/><a className='completeAction'>To complete this action,</a> replace bulbs in your home with LED bulbs. <br/><br/> How many bulbs did you replace?</React.Fragment>}
           inputs={true}
           addItemsToUser={(bulbs, points, userId) => this.props.addBulbToUser(bulbs, points, userId)}
           />
@@ -40,7 +40,7 @@ class MoreInfoModal extends React.Component {
           resToClick={this.close}
           completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
           inputs={true}
-          slogan={"How many windows did you upgrade?"}
+          slogan={<React.Fragment>Replacing old windows with energy efficient counterparts could save you $350 annually on utility bills!<br/><a className='completeAction'>To complete this action,</a> replace old windows with energy efficient windows. <br/><br/>How many windows did you replace? </React.Fragment>}
           addItemsToUser={(windows, points, userId) => this.props.addWindowsToUser(windows, points, userId)}
           />
         // Refrigerator
@@ -50,7 +50,7 @@ class MoreInfoModal extends React.Component {
           resToClick={this.close}
           completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
           inputs={false}
-          slogan={"Use this calculator to determine how much you can save by flipping your fridge: <a href='https://www.energystar.gov/index.cfm?fuseaction=refrig.calculator'></a> Did you upgrade your refrigerator?"}
+          slogan={<React.Fragment>You could save $270 over the next five years by flipping your fridge from an energy guzzler to an energy saver! Use <a href="https://www.energystar.gov/index.cfm?fuseaction=refrig.calculator">this calculator</a> to determine how much you can save.<br/><a className='completeAction'>To complete this action,</a> replace your fridge <br/><br/>Did you upgrade your refrigerator? </React.Fragment>}
           addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
           />
         // Drive Less
@@ -60,7 +60,7 @@ class MoreInfoModal extends React.Component {
           resToClick={this.close}
           inputs={true}
           completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
-          slogan={"How many fewer miles did you drive this week? Note: the below savings represent the amount of money saved if you sustained this reduction for the entire year!"}
+          slogan={<React.Fragment><a className='completeAction'>To complete this action,</a>commit to driving fewer miles this week.<br/><br/>How many fewer miles did you drive this week? Note that the below savings represent the amount of money you would save if you maintained this habbit for the entire year.</React.Fragment>}
           addItemsToUser={(miles, points, userId) => this.props.addMilesToUser(miles, points, userId)}
           />
         // Monitors
@@ -70,7 +70,7 @@ class MoreInfoModal extends React.Component {
             resToClick={this.close}
             completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
             inputs={true}
-            slogan={"On how many monitors did you enable sleep mode?"}
+            slogan={<React.Fragment><a className='completeAction'>To complete this action,</a>take two seconds out of your day and enable sleep mode on your computer and/or monitor to save $14 this year.</React.Fragment>}
             addItemsToUser={(monitors, points, userId) => this.props.addMonitorsToUser(monitors, points, userId)}
             />
           //Trash
@@ -80,7 +80,7 @@ class MoreInfoModal extends React.Component {
             resToClick={this.close}
             completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
             inputs={false}
-            slogan={"Did you ...trash?"}
+            slogan={<React.Fragment>text1<br/><a className='completeAction'>To complete this action,</a> commit to not producing trash for three days.</React.Fragment>}
             addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
             />
           // Winter Heat
@@ -89,7 +89,7 @@ class MoreInfoModal extends React.Component {
             card={this.props.card}
             resToClick={this.close}
             completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
-            slogan={"How many degrees did you decrease your heat?"}
+            slogan={<React.Fragment><a className='completeAction'>To complete this action,</a> commit to turning down your thermostat this week.<br/><br/>By how many degrees did you decrease your heat? Note that the below savings represent the amount of money you would save if you maintained this habbit for the entire year.</React.Fragment>}
             inputs={true}
             addItemsToUser={(degrees, points, userId) => this.props.addDegreesDecreasedToUser(degrees, points, userId)}
             />
@@ -100,7 +100,7 @@ class MoreInfoModal extends React.Component {
             resToClick={this.close}
             completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
             inputs={false}
-            slogan={"Did you purchase clean power?"}
+            slogan={<React.Fragment>Reduce your carbon footprint by purchasing clean energy from your utility or a third-party distributor.<br/></React.Fragment>}
             addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
             />
           // Cold Water Wash
@@ -110,7 +110,7 @@ class MoreInfoModal extends React.Component {
             resToClick={this.close}
             completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
             inputs={false}
-            slogan={"Did you wash your clothes in cold water?"}
+            slogan={<React.Fragment>Wash clothes in cold water this week to conserve energy and preserve colors.<br/><br/>Note that the below savings represent the amount of money you would save if you maintained this habbit for the entire year.</React.Fragment>}
             addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
             />
           // Programmable Thermostat
@@ -120,7 +120,7 @@ class MoreInfoModal extends React.Component {
             resToClick={this.close}
             inputs={false}
             completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
-            slogan={"Did you purchase a programmable thermostat?"}
+            slogan={<React.Fragment>Automate your energy savings and save big on utility bills by purchasing a programmable thermostat.</React.Fragment>}
             addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
             />
           // Air Leaks
@@ -130,7 +130,7 @@ class MoreInfoModal extends React.Component {
               resToClick={this.close}
               completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
               inputs={false}
-              slogan={"Did you fix air leaks?"}
+              slogan={<React.Fragment>Insulating your home can save you 20% on utility bills!<br/><a className='completeAction'>To complete this action,</a>ensure that your home is properly insulated.</React.Fragment>}
               addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
               />
             //Summer AC
@@ -139,7 +139,7 @@ class MoreInfoModal extends React.Component {
                 card={this.props.card}
                 resToClick={this.close}
                 completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
-                slogan={"How many degrees did you increase your heat?"}
+                slogan={<React.Fragment><a className='completeAction'>To complete this action,</a>commit to turning down your thermostat this week.<br/><br/>By how many degrees did you decrease your heat? Note that the below savings represent the amount of money you would save if you maintained this habbit for the entire year.</React.Fragment>}
                 inputs={true}
                 addItemsToUser={(degrees, points, userId) => this.props.addDegreesIncreasedToUser(degrees, points, userId)}
                 />
@@ -150,7 +150,7 @@ class MoreInfoModal extends React.Component {
                 resToClick={this.close}
                 completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
                 inputs={false}
-                slogan={"Did you recycle?"}
+                slogan={<React.Fragment><a className='completeAction'>To complete this action,</a>recycling all recyclables, including batteries, magazines, and light bulbs, for one week.</React.Fragment>}
                 addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
                 />
             //Water Heater Temperature
@@ -160,7 +160,7 @@ class MoreInfoModal extends React.Component {
                 resToClick={this.close}
                 completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
                 inputs={false}
-                slogan={"Did you decrease the temperature on your water heater?"}
+                slogan={<React.Fragment><br/><a className='completeAction'>To complete this action,</a>save an easy $42/year by simply adjusting your water heater to the recommended temperature: 120 degrees.</React.Fragment>}
                 addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
                 />
               //Solar
@@ -170,7 +170,7 @@ class MoreInfoModal extends React.Component {
                   resToClick={this.close}
                   completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
                   inputs={false}
-                  slogan={"Did you install solar panels?"}
+                  slogan={<React.Fragment>Turn your roof into your own personal, renewable power plant by installing solar panels on your roof. Find out how much you can save with solar by visiting this <a href="https://www.solar-estimate.org/solar-panel-calculations/solar-savings-calculator">Solar Estimator</a></React.Fragment>}
                   addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
                   />
                 //Peak
@@ -180,7 +180,7 @@ class MoreInfoModal extends React.Component {
                     resToClick={this.close}
                     completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
                     inputs={false}
-                    slogan={"Did you not consume energy during peak horus?"}
+                    slogan={<React.Fragment>text1<br/><a className='completeAction'>To complete this action,</a> refrain from using heavy appliances such as electric vehicle supply equipment, clothes washers, and pool pumps between 12pm-6pm this week.This low-effort method can help prevent your utility from burning unneeded fossil fuels!</React.Fragment>}
                     addItemsToUser={(points, userId) => this.props.addPointsToUser(points, userId)}
                     />
             default:

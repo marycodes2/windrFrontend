@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Icon, Responsive, Menu, Header } from 'semantic-ui-react'
 import { logOut } from '../actions/simpleAction'

@@ -6,7 +6,7 @@ import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'
 import SignUp from '../Components/SignUp'
 import Login from '../Components/Login'
-import { settingUser, fetchCards, getUsers } from '../actions/simpleAction'
+import { settingUser } from '../actions/simpleAction'
 
 
 class App extends Component {
@@ -18,10 +18,8 @@ class App extends Component {
     // console.log("token is equal to ", token)
     if (token && this.props.allCards.length < 1) {
       this.props.settingUser(token)
-
-      // this.props.fetchCards()
     }
-    // console.log("current user is", this.props.currentUser)
+
   }
 
   render() {
@@ -51,7 +49,6 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    myCards: state.reducer.myCards,
     allCards: state.reducer.allCards,
     currentUser: state.reducer.currentUser,
   }
@@ -59,9 +56,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    settingUser: (token) => {dispatch(settingUser(token))},
-    fetchCards: () => {dispatch(fetchCards())},
-    getUsers: () => {dispatch(getUsers())}
+    settingUser: (token) => {dispatch(settingUser(token))}
   }
 }
 
