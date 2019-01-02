@@ -64,8 +64,9 @@ export default class WindrCard extends React.Component {
       <React.Fragment>
       <div>
         <Icon name='plus square outline'/>
-        {this.props.card.score} points per action
-        {this.props.card.dollar_savings} points per action
+        {this.props.card.score} points per action </br>
+        <Icon name='dollar sign'/>
+        <DetermineNumStars icon={"dollar"} measurement={this.props.card.dollar_savings}/> savings per action
       </div>
       </React.Fragment>
       }
