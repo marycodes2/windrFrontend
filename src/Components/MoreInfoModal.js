@@ -70,7 +70,7 @@ class MoreInfoModal extends React.Component {
             resToClick={this.close}
             completeCard={(total_score, total_dollar_savings) => this.completeCard(total_score, total_dollar_savings)}
             inputs={true}
-            slogan={<React.Fragment><a className='completeAction'>To complete this action,</a> take two seconds out of your day and enable sleep mode on your computer and/or monitor and save $14 this year.</React.Fragment>}
+            slogan={<React.Fragment><a className='completeAction'>To complete this action,</a> take two seconds out of your day and enable sleep mode on your computer and/or monitor and save $14 this year.<br/>On how many monitors did you enable sleep mode?</React.Fragment>}
             addItemsToUser={(monitors, points, userId) => this.props.addMonitorsToUser(monitors, points, userId)}
             />
           //Trash
