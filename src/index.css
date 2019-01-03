@@ -92,9 +92,19 @@ h2.ui.header .sub.header {
   margin-right: 2em;
 }
 
+#likeAndDislikeButtonsLargeScreen {
+  padding-left: 38%;
+  padding-right: 38%;
+  padding-top: -50%;
+  margin-top: -1%;
+
+  /* padding-left: 2em;
+  padding-right: 2em; */
+}
+
 #likeAndDislikeButtons {
-  padding-left: 35%;
-  padding-right: 35%;
+  padding-left: 34%;
+  padding-right: 34%;
   padding-top: -50%;
   margin-top: -1%;
 

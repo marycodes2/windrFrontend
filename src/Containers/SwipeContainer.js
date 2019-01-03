@@ -116,7 +116,15 @@ class SwipeContainer extends React.Component {
         <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/>)}
       </div>
       <Responsive
-        minWidth={451}>
+        minWidth={1301}>
+      <div
+        id="likeAndDislikeButtonsLargeScreen">
+        <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
+        <Button circular raised="true" size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
+      </div>
+    </Responsive>
+      <Responsive
+        minWidth={451} maxWidth={1300}>
       <div
         id="likeAndDislikeButtons">
         <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
