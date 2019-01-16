@@ -20,6 +20,12 @@ class App extends Component {
       this.props.settingUser(token)
     }
 
+    var http = require("http");
+
+    setInterval(function() {
+    http.get("https://windrapp.herokuapp.com");
+      }, 300000); // every 5 minutes
+
   }
 
   render() {
