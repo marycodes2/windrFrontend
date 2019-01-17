@@ -19,12 +19,13 @@ class App extends Component {
     if (token && this.props.allCards.length < 1) {
       this.props.settingUser(token)
     }
-
     var http = require("http");
+    console.log(http)
 
     setInterval(function() {
+    console.log("this works!")
     http.get("https://windrapp.herokuapp.com");
-      }, 300000); // every 5 minutes
+    }, 30000); // every 5 minutes, should be 300000
 
   }
 
