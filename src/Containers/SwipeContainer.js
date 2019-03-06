@@ -1,7 +1,10 @@
 import React from 'react';
 import Card from '../Components/Card'
+//connect to redux store (state management tool)
 import { connect } from 'react-redux'
+//import redux actions
 import { addCardToMyCards, addCardToUserCards, settingUser, userNoLongerFirstTime, userNoLongerFirstTimeSwipe } from '../actions/simpleAction'
+// import styling component library - semantic
 import { Loader, Button, Header, Responsive, List, Modal, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
@@ -13,17 +16,21 @@ class SwipeContainer extends React.Component {
   }
 
   componentDidMount() {
+    // if JWT token in local storage, user signed in
     let token = localStorage.getItem('token')
     // console.log("token is equal to ", token)
+    // if the token exists and EE cards are fetched from backend, set user
     if (token && this.props.allCards.length < 1) {
       this.props.settingUser(token)
-      // this.props.fetchCards()
     }
   }
 
+
   determineCardsNotInQueue = () => {
+    //find all of user's card ids
     var myCardIds = this.props.myCards.map(card => card.id)
 
+    //find all cards that have not been added to user's queue
     var cardsNotInQueue = this.props.allCards.filter(card =>
       !(myCardIds.includes(card.id)))
 
@@ -35,6 +42,7 @@ class SwipeContainer extends React.Component {
     this.props.addCardToMyCards(card)
   }
 
+  //respond to user swipe of card
   respondToSwipe = (returnCard, position) => {
     let currentUser = this.props.currentUser
     this.addCard(returnCard)
@@ -42,12 +50,14 @@ class SwipeContainer extends React.Component {
       if (this.props.currentUser.first_time_user) {
         this.userNowKnowsAppSwipe()
       }
+      //add card to the user's cards, but don't add card to user's queue
       this.props.addCardToUserCards(returnCard, false, currentUser)
     }
     else if (position === "right") {
       if (this.props.currentUser.first_time_user) {
         this.userNowKnowsAppSwipe()
       }
+      //add card to the user's cards and add card to user's queue
       this.props.addCardToUserCards(returnCard, true, currentUser)
     }
   }
@@ -56,6 +66,7 @@ class SwipeContainer extends React.Component {
     this.props.userNoLongerFirstTime(this.props.currentUser.id)
   }
 
+  //removes instructions from this screen on next page load
   userNowKnowsAppSwipe = () => {
     this.props.userNoLongerFirstTimeSwipe(this.props.currentUser.id)
   }
@@ -65,6 +76,7 @@ class SwipeContainer extends React.Component {
     this.userNowKnowsApp()
   }
 
+  //responsive design below
   render() {
     if (!this.props.loaded) {
       return <div
@@ -90,10 +102,12 @@ class SwipeContainer extends React.Component {
     }
     return(
       <React.Fragment>
+
         <Responsive
            minWidth={451}>
            {(this.props.currentUser.first_time_user) ? <React.Fragment><Header as='h3' id='getStarted' textAlign='center'>Welcome to Windr! <br/> Swipe <a id="right">right</a> on cards that pique your interest and <a id='left'>left</a> on cards that do not.</Header></React.Fragment> : null}
         </Responsive>
+
         <Responsive
            maxWidth={450}>
            {this.props.currentUser.first_time_user ?
@@ -109,43 +123,47 @@ class SwipeContainer extends React.Component {
               </Modal.Actions>
             </Modal> : null}
         </Responsive>
+
       <div
         id="swipe"
         className="ui one column grid cards">
         {this.determineCardsNotInQueue().slice(0, 1).map(card =>
         <Card card={card} key={card.id} respondToSwipe={(card, position) => this.respondToSwipe(card, position)}/>)}
       </div>
+
       <Responsive
         minWidth={1301}>
-      <div
-        id="likeAndDislikeButtonsLargeScreen">
-        <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
-        <Button circular raised="true" size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
-      </div>
-    </Responsive>
+        <div
+          id="likeAndDislikeButtonsLargeScreen">
+          <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
+          <Button circular raised="true" size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
+        </div>
+      </Responsive>
+
       <Responsive
         minWidth={451} maxWidth={1300}>
+        <div
+          id="likeAndDislikeButtons">
+          <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
+          <Button circular raised="true" size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
+        </div>
+    </Responsive>
+
+    <Responsive
+      maxWidth={450}>
       <div
-        id="likeAndDislikeButtons">
+        id="likeAndDislikeButtonsForMobile">
         <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
         <Button circular raised="true" size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
       </div>
     </Responsive>
-    <Responsive
-      maxWidth={450}>
-    <div
-      id="likeAndDislikeButtonsForMobile">
-      <Button circular raised="true" size='massive' floated='left' icon='close' inverted color='red' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "left")}/>
-      <Button circular raised="true" size='massive' floated='right'icon='like' inverted color='green' onClick={() => this.respondToSwipe(this.determineCardsNotInQueue()[0], "right")}/>
-    </div>
-  </Responsive>
 
-
-      </React.Fragment>
+  </React.Fragment>
     )
   }
 }
 
+//connect state to redux store
 const mapStateToProps = state => {
   return {
     myCards: state.reducer.myCards,
@@ -156,6 +174,7 @@ const mapStateToProps = state => {
   }
 }
 
+//connect methods to redux store
 const mapDispatchToProps = (dispatch) => {
   return {
     addCardToMyCards: (card) => {dispatch(addCardToMyCards(card))},
